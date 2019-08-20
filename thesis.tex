@@ -29,40 +29,6 @@
 \usepackage{multirow}
 \usepackage{subcaption}
 
-\newcommand{\sa}{\shortrightarrow}
-\newcommand{\bo}{\mathbf\Omega}
-\newcommand{\vecr}{\textbf{r}}
-\newcommand{\sn}{S$_\mathrm{N}$~}
-\newcommand{\pn}{P$_\mathrm{N}$~}
-\newcommand{\sigt}{\Sigma_t}
-\newcommand{\sigs}{\Sigma_s}
-\newcommand{\hl}{\mathcal{H}_L}
-\newcommand{\maths}{\mathbb{S}^2}
-\newcommand{\dl}{d_L}
-\newcommand{\lij}{\langle L_i,L_j \rangle}
-\newcommand{\kij}{\langle K_i,K_j \rangle}
-\newcommand{\ve}[1]{\ensuremath{\mathbf{#1}}}
-\newcommand{\Ye}[2]{\ensuremath{Y^e_{#1}(\bo_#2)}}
-\newcommand{\Yo}[2]{\ensuremath{Y^o_{#1}(\bo_#2)}}
-\newcommand{\Sigg}[1]{\ensuremath{\Sigma^{g'\sa g}_{\text{s},#1}}}
-\newcommand{\even}{\ensuremath{\phi^g}}
-\newcommand{\odd}{\ensuremath{\vartheta^g}}
-\newcommand{\xhat}{\ensuremath{\hat{x}}}
-\newcommand{\xbar}{\ensuremath{\bar{x}}}
-\newcommand{\qhat}{\ensuremath{\hat{q}}}
-\newcommand{\psihat}{\ensuremath{\hat{\psi}}}
-\newcommand{\khat}{\ensuremath{\hat{K}}}
-\newcommand{\Gij}[2]{\sum_{\ell=0}^L\frac{2\ell+1}{4\pi}P_{\ell}(\bo_#1\cdot\bo_#2)}
-\newcommand{\Sij}[2]{\Sigma^{g'\rightarrow g}_{\text{s,L}}(\bo_#1\cdot\bo_#2)}
-\newcommand{\Snij}[3]{\Sigma^{g'\rightarrow g}_{\text{s,#1}}(\bo_#2 \cdot \bo_#3)}
-\newcommand{\Snz}[3]{\Sigma^{0\sa 0}_{\text{s,#1}}(\bo_#2 \cdot \bo_#3)}
-\newcommand{\ldosig}[2]{\sum_{n=0}^N \frac{2n+1}{4\pi}\sigma_{s,n}^{g'\rightarrow g} P_n(\bo_#1\cdot\bo_#2)}
-\newcommand{\fq}{\qquad\qquad\qquad\qquad}
-\newcommand{\st}{\tilde{S}}
-\newcommand{\E}[1]{$\times10^{#1}$}
-\newcommand{\del}{\partial}
-\newcommand{\mr}[1]{\multirow{2}{*}{#1}}
-
 \makeatletter
 \let\oldcite\cite
 \pretocmd{\listoffigures}{\def\cite{\ignorespaces\@gobble}}{}{}
@@ -91,25 +57,20 @@
 
 \bibliography{references}
 
-\hyphenation{mar-gin-al-ia}
-\hyphenation{bra-va-do}
-\hyphenation{quad-ru-ple}
-\hyphenation{ADVANTG}
-\hyphenation{CADIS}
-\newcommand{\fwc}{\mbox{FW-CADIS}}
-\newcommand{\co}{\mbox{CADIS-$\Omega$}}
-\newcommand{\fwco}{\mbox{FW/CADIS-$\Omega$}}
+\hyphenation{SERPENT 2}
+\hyphenation{ADDER}
 
 \begin{document}
 
 % Declarations for Front Matter
 
-\title{Advanced Quadrature Selection for Monte Carlo Variance Reduction}
-\author{Kelly L. Rowland}
-\degreesemester{Spring}
-\degreeyear{2018}
+\title{Predicting Fuel Salt Composition via Linear Optimization in Molten Salt
+Reactors}
+\author{Daniel D. Wooten}
+\degreesemester{Fall}
+\degreeyear{2019}
 \degree{Doctor of Philosophy}
-\chair{Assistant Professor Rachel N. Slaybaugh}
+\chair{Assistant Professor Massamiliano Fratoni}
 \othermembers{
 	Associate Professor Per-Olof Persson \\
 	Professor Jasmina Vuji\'c \\
@@ -202,8 +163,13 @@ fathomed.
 
 \scriptsize{This material is based upon work supported under an Integrated
 University Program Graduate Fellowship as well as supported by the Department 
-of Energy under Award Number(s) DE-NE0008661. This report was prepared as an account 
-of work sponsored by an agency of the United States Government. Neither the United 
+of Energy under Award Number(s) DE-NEXXXXXX. 
+This material is based upon work supported under a Nuclear Regulatory 
+Commission Fellowship under Award Number(s) DE-NEXXXXXX. 
+This material is based upon work supported under a National Nuclear Security 
+Commission Fellowship under Award Number(s) DE-NEXXXXXX. 
+This report was prepared as an account  of work sponsored by an agency of the 
+United States Government. Neither the United 
 States Government nor any agency thereof, nor any of their employees, makes any 
 warranty, express or limited, or assumes any legal liability or responsibility for the 
 accuracy, completeness, or usefulness of any information, apparatus, product, or

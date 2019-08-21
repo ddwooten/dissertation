@@ -1,4 +1,4 @@
-\chapter{Introduction}
+\chapter{Introduction}\label{ch:intro}
 
 Molten salt reactors ( MSRs ) first gained attention in the 1950s as a possible
 high power density propulsion source for a nuclear powered aircraft. While this
@@ -51,14 +51,15 @@ should they exceed their solubility limits, and second the corrosion rate of the
 specialty structural nickel/iron alloys is on the order of
 micro-meters per year when the reduction potential of the salt is kept near
 a specific value while a slight deviation from this value can raise corrosion
-rates to centimeters per year. As such, it is in the operator's best interest to
-keep a tight control over the MSR fuel salt.
+rates to centimeters per year \cite{Corrosion}. 
+As such, it is in the operator's best interest to keep a tight control over 
+the MSR fuel salt.
 
 Capturing all of these phenomenon in a single nuclear fuel depletion code is
 non-trivial and raises the question, how does the fuel salt composition in a 
 molten salt fueled reactor change over time in response to both nuclear fuel
 burnup and the reactor operator actions? Addressing this question is the goal
-of the work presented herein.
+of the work presented herein. 
 
 \subsection{Framing the problem}
 
@@ -66,10 +67,57 @@ The goal is to create a nuclear fuel depletion model which accounts for the
 physical phenomenon acting on the liquid fuel of a MSR with a flowing fuel core.
 Perhaps the least quanitifed unknown is that of the operator's actions. What are
 the operators objectives? What tools does the operator have at their disposal?
-What the measures by which the operator assess their actions? As in most
+What are the measures by which the operator assess their actions? As in most
 simulation problems the variable of most varience here is the human. To
 approximate the human in this model they are repalaced with a linear opimization
-routine. If the constrainsts facing the operator may be approximated with linear relationships and if the operator's desires may be approximated as minimizing
+routine. If the constrainsts facing the operator may be approximated with linear
+ relationships and if the operator's desires may be approximated as minimizing
 or maximizing a given value then the choices of the operator may be predicted
-via linear optimization.
+via linear optimization. Ensuring that the problem constraints and optimization 
+targets are all linear strikes a compromise between the ease and reproducibility
+of the optimization solution and the model's adherence to the physical 
+phenomenon being simulated.
 
+One goal an operator is stipulated to have is keeping specific chemical
+species within the fuel salt at some relative proportion to some other
+specific chemical species. This goal arrises from the variable solubility of
+chemical species within a given salt mixture - a solubility which changes
+based both on temperature and the relative proportion of other chemical species.
+A related objective an operator is stipulated to have is to maintain the fuel
+salt reuction-oxidation (redox) potential at some desired value for corrosion
+prevention as mentioned above. An important goal for all nuclear reactor
+operators is to maintain the multiplication value of the reacting system. These
+considerations here form the general operational contraints of a MSR. A
+method for simulating the fuel cycle of a MSR must account for all these
+considerations as well as for the physical phenomenon which act on MSRs
+uniquely in reference to their solid-fuel counterparts.
+
+Various approaches have been made to create a methodology for simulating MSR
+fuel cyclels. Aufiero approximates nuclear criticality as only being dependent 
+on two isotopes, chosen by the user which can be fed and removed according to 
+the deviation from criticality. To handle salt species considerations Aufiero
+ignores them, simply removing lithium for each fission product produced and
+adding it for each fission product removed \cite{Aufiero}. Betlzer takes a more
+nuanced approach using mass limits on chemical species to spur the injection or
+removal of material
+in a MSR; however, only one isotope is allowed to be specified for nuclear
+criticality control \cite{Betzler}. Ridley ignores salt contituent balance
+but rather choses to deal with the maintence of the redox potential only by
+allowing the injection or removal of fluorine as tailored to a MSR using
+\ce{LiF-BeF_{2}} eutectic salt. With regards to criticality control Ridley
+uses a weighted difference scheme similar to Aufiero but only allowing the use
+of Uranium 235 and 238 \cite{Ridley}. 
+
+That which distinguishes this work from its peers is the way in which human 
+actions on the reactor are simulated, via linear optimization in consideration
+of all contraints at once, and by the completness of both the physical model
+and this models integration into a simulation suite.
+
+In the following chapters ADER, the Advanced Depletion Extension for
+Reprocessing, is introduced. First the theory on which ADER is based is
+presented in chapter \ref{ch:meth} along with its integration into the reactor
+physics monte-carlo code SERPENT 2 \cite{Jaakko}. In chapter
+\ref{ch:simul} the capabilities of ADER are investigated in relation to a
+hypothetical MSR fuel cycle. In chapter \ref{ch:con} the effects of ADER on
+MSR fuel cycle modelling are presented as well as recommendations for next
+steps. 

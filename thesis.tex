@@ -41,6 +41,27 @@
 \apptocmd{\listoftables}{\let\cite\oldcite}{}{}
 \makeatother
 
+%For flowcharts
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{arrows, decorations.markings}
+\usetikzlibrary{positioning}
+
+%For inclusion of figures
+\usepackage{graphicx}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.0cm, text centered, draw=black, fill=lightgray]
+\tikzstyle{process} = [rectangle, minimum width=6cm, minimum height=1.0cm, text width = 5cm, text centered, draw=black, fill=lightgray]
+\tikzstyle{decision} = [diamond, minimum width=2cm, minimum height=1cm, text width = 3cm, text centered, draw=black, fill=lightgray]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, text width = 3cm, minimum height=1cm, text centered, draw=black, fill=lightgray]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
+   1 with {\arrow[semithick]{open triangle 60}}},
+   double distance=1.4pt, shorten >= 5.5pt,
+   preaction = {decorate},
+   postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+\tikzstyle{innerWhite} = [semithick, white,line width=1.4pt, shorten >= 4.5pt]
+
 % To compile this file, run "latex thesis", then "biber thesis"
 % (or "bibtex thesis", if the output from latex asks for that instead),
 % and then "latex thesis" (without the quotes in each case).

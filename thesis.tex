@@ -9,12 +9,11 @@
 \documentclass{ucbthesis}
 \usepackage[dvipdfmx]{graphicx} % needs to be up top
 \usepackage{bmpsize}
+\usepackage{blkarray}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[sorting=none,backend=biber]{biblatex}
 \usepackage{color}
-\usepackage{etoolbox}
-\usepackage[hidelinks]{hyperref}
 \usepackage[super]{nth}
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
@@ -23,23 +22,8 @@
 \usetikzlibrary{3d,angles,quotes,calc}
 \usepackage[export]{adjustbox} % must be below tikz else tikzplots are scronched
 \usepackage[version=3]{mhchem}
-\usepackage{textcomp}
-\usepackage{stmaryrd} % for short right arrow
-\usepackage{placeins}
 \usepackage{multirow}
 \usepackage{subcaption}
-
-\makeatletter
-\let\oldcite\cite
-\pretocmd{\listoffigures}{\def\cite{\ignorespaces\@gobble}}{}{}
-\apptocmd{\listoffigures}{\let\cite\oldcite}{}{}
-\makeatother
-
-\makeatletter
-\let\oldcite\cite
-\pretocmd{\listoftables}{\def\cite{\ignorespaces\@gobble}}{}{}
-\apptocmd{\listoftables}{\let\cite\oldcite}{}{}
-\makeatother
 
 %For flowcharts
 \usepackage{tikz}
@@ -130,57 +114,6 @@ Reactors}
 
 \begin{acknowledgements}
 \small
-It takes a village to make a doctor. I cannot express how grateful I am to
-the colleagues, friends, family, and various community members who have
-supported me throughout my tenure in graduate school. Without all of your
-contributions, this process would have been much more difficult.
-
-Many thanks go to my dissertation committee for their time and effort spent
-in improving the quality of this writing. I would like to thank the Exnihilo
-team at Oak Ridge National Laboratory for all of their help and guidance.
-Dr. Steven Hamilton, you have my sincerest gratitude for your help at all
-levels of this project, from working through big conceptual questions to
-kindly pointing out the smallest of floating point errors. This work would
-not have been finished in any sort of timely manner without your generosity.
-
-My colleagues have made Berkeley an amazing place to work and grow. Drs.
-Phil Gorman and Katy Huff, thank you for your patience and kindness in
-teaching me scientific computing skills when I had none. Dr. Madicken Munk,
-my commiserator-in-chief, thank you for seeing me through the most trying
-of times and for paving a better-informed \texttt{PATH} than I would have
-otherwise traversed. Daniel Wooten, thank you for helping me to say no
-to more things. Josh Rehak, thanks for helping me keep it surreal. Ellen
-Edwards, thank you for continually inspiring me to challenge myself.
-
-Berkeley Research Computing has been a great source of pride and joy for me
-to be a part of. Aaron Culich, I cannot thank you enough for looking at a
-graduate student in desperate need of help and seeing the potential for so
-much more. I am grateful to the Department of Nuclear Engineering for all of
-the free coffee that it has provided.
-
-To my family, thank you for your endless support and encouragement. You have
-provided me with an incredible foundation from which I have been fortunate
-to pursue any and all of my dreams.
-
-Cathy Berman, thank you for being my personal cheerleader and helping me
-grow into myself. Dr. Dillon Shaver, thank you for helping me pass my
-screening exams when I really needed it.
-Shola Ogunlana, thank you for leading the STRONGER family
-to be better versions of ourselves through each and every burpee. Mitch
-Crispell, thank you for bringing joy to every single person who steps into
-one of your dance classes. Alex Converse, thank you for the love and support
-that you have provided, even when it meant bearing with me through a few
-periods of crunch time.
-
-Professor Rachel N. Slaybaugh, thank you for advising me in so much more
-than just this dissertation work. Your perspective and insights have helped
-me to not only bloom as a researcher, but to a grow as a person as well. I
-am very fortunate to have had your support in the myriad of endeavors that
-I have undertaken in graduate school. Thank you for caring about my well-being
-as an individual and broadening my horizons in ways that I never could have
-fathomed.
-
-\vspace{\fill}
 
 \scriptsize{This material is based upon work supported under an Integrated
 University Program Graduate Fellowship as well as supported by the Department 

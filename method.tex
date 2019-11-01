@@ -78,7 +78,7 @@ b_{m} \leq \sum \limits_{k}^{K} I_{k}^{f,k} \leq b_{M}
 The second principle constraint involves the relative abundance limits between 
 pairs of groups; a constraint which can be used to approximate chemical 
 solubility limits. Relative group abundance limits can be expressed as seen in 
-Equation~\ref{eq:rto_ratio} where $r_{m/M}$ indicates a relative abundance 
+Equation \ref{eq:rto_ratio} where $r_{m/M}$ indicates a relative abundance 
 minimum and maximum bound, respectively.
 
 \begin{equation}
@@ -86,8 +86,8 @@ minimum and maximum bound, respectively.
 r_{m} \leq \frac{g_{1}}{g_{2}} \leq r_{M} 
 \end{equation}
 
-Equation~\ref{eq:rto_ratio} can be expressed linearly as two inequalities as
-shown in Equations~\ref{eq:rto_min} and \ref{eq:rto_max}.
+Equation \ref{eq:rto_ratio} can be expressed linearly as two inequalities as
+shown in Equations \ref{eq:rto_min} and \ref{eq:rto_max}.
 
 \begin{equation}
 \label{eq:rto_min}
@@ -125,7 +125,7 @@ material.
 
 \subsection{Oxidation constraints} \label{ssec:oxid_eq}
 A weighted sum over all elements in a material with target values forms the 
-next constraint which can be applied to a material (Equation~\ref{eq:oxi}). 
+next constraint which can be applied to a material (Equation \ref{eq:oxi}). 
 Although the framework for this summation was implemented as a rough 
 approximation to redox potential
 monitoring in liquid systems (discussed more in Section \ref{ssec:oxi}) there is
@@ -145,7 +145,7 @@ factor which can be applied to any element.
 \subsection{Reactivity constraints} \label{ssec:reactivity}
 A weighted sum over isotopes in a material forms the reactivity constraint that
 may be applied. This constraint is derived from the expression for the 
-multiplication factor as found in Equation~\ref{eq:reac}:
+multiplication factor as found in Equation \ref{eq:reac}:
 
 \begin{equation}
 \label{eq:reac}
@@ -159,7 +159,7 @@ averaged neutron production cross section, and the macroscopic absorption cross
 section for each material $m$. $P_{NL}$ is the neutron non-leakage probability.
 In ADER, the ability to control $k_{eff}$ is limited to the case of a single 
 neutron multiplying material; take $\nu\Sigma_{f}=0$ for every material but the
-multiplying material $M$ and as such Equation~\ref{eq:reac} can be rewritten as
+multiplying material $M$ and as such Equation \ref{eq:reac} can be rewritten as
 follows:
 
 \begin{equation}
@@ -190,8 +190,8 @@ which $\nu\Sigma_{f} \approx 0$ for all other materials.
 
 In this case, given lower and upper bounds for the multiplication factor of the
 system, $k_{eff}^{min}$ and $k_{eff}^{max}$ respectively, 
-Equation~\ref{eq:reac_modified} can be  made linear as in 
-Equations~\ref{eq:k_min} and \ref{eq:k_max}.
+Equation \ref{eq:reac_modified} can be  made linear as in 
+Equations \ref{eq:k_min} and \ref{eq:k_max}.
 
 \begin{equation}
 \label{eq:k_min}
@@ -212,7 +212,7 @@ affect all simulations, more so those with strong leakage effects.
 % ******************************************************************************************************
 
 \subsection{The optimization method} \label{ssec:opt}
-Equations~\ref{eq:group_def_ele_lim}, \ref{eq:group_def_iso_lim}, 
+Equations \ref{eq:group_def_ele_lim}, \ref{eq:group_def_iso_lim}, 
 \ref{eq:rto_min}, \ref{eq:rto_max}, \ref{eq:stream_eq_ele}, 
 \ref{eq:stream_eq_iso}, \ref{eq:oxi}, \ref{eq:k_min}, and \ref{eq:k_max} 
 demonstrate the linearity of the problem.  Given a linear
@@ -220,12 +220,12 @@ set of equations, and a set which in various configurations could be
 under-constrained, over-constrained, or equal, the best optimization route is
 linear optimization or linear programming as it is sometimes known. The linear
 programming problem is represented by a sparse matrix which is manipulated to 
-produce the optimal solution (details in Section~\ref{ssec:opt_matrix}).
+produce the optimal solution (details in Section \ref{ssec:opt_matrix}).
 
 
 \section{Implementation in SERPENT 2} \label{sec:implementation}
 Utilizing the linear relationships described in 
-Section~\ref{sec:equations}, ADER brings to SERPENT 2 the ability for
+Section \ref{sec:equations}, ADER brings to SERPENT 2 the ability for
 users to define desired relationships between constituent units of a material 
 and to define material flows within
 the system. Additionally ADER provides tools for constraints based upon the 
@@ -260,7 +260,7 @@ may be defined for an arbitrary number of group pairs. To define relationships
 between the material and the related groups, a range of absolute abundances of 
 a group in a material may be specified for an arbitrary number of groups. 
 The governing equations of these relationships are found in 
-Section~\ref{sssec:group_eq}. To facilitate modelling
+Section \ref{sssec:group_eq}. To facilitate modelling
 of chemical compounds with related and possibly interchangeable forms, a group
 in ADER may also be formed from the linear combination of any other groups
 previously defined. These three simple mechanisms can be combined to model
@@ -381,12 +381,12 @@ That said, it is suspected that this feature will greatly ease the
 burden on most MSR simulations as most proposed fuel salts have a dominant
 anion which bonds with near everything else to the exclusion of other
 compounds. Combining this tool with the principles from the Nernst equation,
-Equation~\ref{eq:nernst}, bounds for the average redox potential of a molten
+Equation \ref{eq:nernst}, bounds for the average redox potential of a molten
 salt can be set---a key metric in controlling corrosion in molten salt systems.
-In Equation~\ref{eq:nernst} $\epsilon_{i}$ is the redox potential,
+In Equation \ref{eq:nernst} $\epsilon_{i}$ is the redox potential,
 $\epsilon_{i}^{o}$ is the redox potential in the standard state, $R$ is the gas
 constant, $T$ is the temperature, $z$ is the number of electrons received by the
-oxidizing agent, $\j$ is Faraday's constant, $[oxid]$ is the activity of the 
+oxidizing agent, $j$ is Faraday's constant, $[oxid]$ is the activity of the 
 oxidized species while $[red]$ is the activity of the reduced species.
 Conversions between activity and concentration are required but approximations 
 may be sufficient; this task is left to the user.
@@ -403,7 +403,7 @@ The multiplication factor of a nuclear system is regularly of interest
 and often desired, in a reactor, to be of a specific value.
 As such users may set system wide $k$-eigenvalue
 constraints through ADER. When such constraints are applied ADER
-incorporates Equations~\ref{eq:k_min} and \ref{eq:k_max} into
+incorporates Equations \ref{eq:k_min} and \ref{eq:k_max} into
 the linear optimization problem so that the effects of mass transfers
 within the system can be constrained by their predicted impacts on
 the multiplication factor of the system. The relevant cross section information,
@@ -412,7 +412,7 @@ fill in Equations \ref{eq:k_min} and \ref{eq:k_max}.
 
 Even if Equation \ref{eq:reac} is exact, $k_{eff}$ is only ever approximated;
 not just from the error inherent in Monte Carlo simulations, but from
-ignoring that every term in Equation~\ref{eq:reac} is non-linearly dependent
+ignoring that every term in Equation \ref{eq:reac} is non-linearly dependent
 on composition. As such it is expected that the reactivity control feature of
 ADER will only behave well for small changes in composition that do not have a
 large effect on the neutron flux. Finally, more of a limitation than an
@@ -465,7 +465,7 @@ the
 left of the appropriate row. Below the column bounds are the variables which
 the columns represent and to the right of the row bounds are the equation
 number, if any, of the equation that row represents. For the sake of brevity
-the matrix in Figure~\ref{fig:opt_matrix} is for one material only though many
+the matrix in Figure \ref{fig:opt_matrix} is for one material only though many
 materials may be involved in such a matrix should they be linked together
 by shared mass transfers. In which case the only variables shared between materials are the
 group-class streams and the stream equations they are a part of are the only
@@ -477,9 +477,9 @@ have non-zero coefficients for some $E_{j}^{d}$ and $I_{k}^{d}$ rows of the
 second material.
 
 Working down the matrix row by row the first row encountered represents 
-Equation~\ref{eq:rto_min} with arbitrary groups $g_{1}$ and $g_{2}$ whereas 
+Equation \ref{eq:rto_min} with arbitrary groups $g_{1}$ and $g_{2}$ whereas 
 the next row 
-down represents Equation~\ref{eq:rto_max}. The third row, what will be referred
+down represents Equation \ref{eq:rto_max}. The third row, what will be referred
 to as an elemental future, row represents the atom balance for element $j$ where
 $f^{n}_{E_{j}^{f}}$ is the fractional proportion of element $j$ in group $n$.
 The novel column involved here is an elemental future column whose inclusion
@@ -516,17 +516,17 @@ referenced equations; $\frac{k_{eff}^{min}}{P_{A}} \sigma_{a}^{k} - \nu^{k}
 \sigma_{f}^{k}$ and
 $\frac{k_{eff}^{max}}{P_{A}} \sigma_{a}^{k} - \nu^{k}
 \sigma_{f}^{k}$. 
-The twelfth row represents Equation~\ref{eq:oxi}, accounting for the
+The twelfth row represents Equation \ref{eq:oxi}, accounting for the
 contributions of the future quantity of elements to a material's averaged
 oxidation state.
 The thirteenth row, or Pres row, exists
 when the user instructs ADER to balance inflows with outflows. The
 pres row requires that the net stream transfers in a material come to zero. The
 effects of table-class streams are captured in $\upsilon$ and $\omega$ as seen
-in Equation~\ref{eq:upsilon_bound} where $s^{t}$ is a table class stream 
+in Equation \ref{eq:upsilon_bound} where $s^{t}$ is a table class stream 
 abundance value. The final row is the optimization, or Opt row. This row
 indicates to the simplex routine which variables to minimize or maximize. In
-Figure~\ref{fig:opt_matrix} the opt row is indicating that $g_{1}$ is the
+Figure \ref{fig:opt_matrix} the opt row is indicating that $g_{1}$ is the
 optimization target.
 
     \begin{equation*}
@@ -700,7 +700,7 @@ then run and if the multiplication factor is outside of the user defined bounds
 executed except the changes already made by discrete type streams remain. 
 Beyond this, ADER modifies the burnup matrix inside of
 SERPENT 2 to reflect the effects of streams. The coefficients in the burnup
-matrix are those in the Bateman equation as seen in Equation~\ref{eq:Bateman} 
+matrix are those in the Bateman equation as seen in Equation \ref{eq:Bateman} 
 for one energy group and zero dimensional case, 
 where $N$ is the number density of nuclide $n$, $t$ is time, $b_{m \to n}$ is 
 the branching ratio for the decay of nuclide $m$ into $n$, $\lambda$ is the 
@@ -716,7 +716,7 @@ time $t$, and $F_{n}(t)$ is a feed (or removal) amount for isotope
 $n$ at time $t$. 
 
 A highly truncated burnup scheme can be
-seen in Figure~\ref{fig:burn_matrix} in which there are two isotopes,
+seen in Figure \ref{fig:burn_matrix} in which there are two isotopes,
 \ce{^{233}U} and \ce{^{135}Xe}, and two streams; $S_{c}$ representing a
 continuous stream with a constant injection rate and $S_{p}$ representing a
 proportional stream with a transfer rate dependent upon the concentration
@@ -729,16 +729,16 @@ concentration of \ce{^{233}U} with $\Gamma$ representing nuclear destruction as
 seen in equation \ref{eq:Gamma_def}. The third column of the first row holds
 the fraction of stream $S_{c}$ that \ce{^{233}U} comprises. These entries
 together describe the evolution of \ce{^{233}U} in the given system. In the
-second row $\Xi$, as seen in Equation~\ref{eq:Xi_def}, represents the production
+second row $\Xi$, as seen in Equation \ref{eq:Xi_def}, represents the production
 of \ce{^{135}Xe} from \ce{^{233}U}. In the second column of the second row are
 the processes dependant on the concentration of \ce{^{135}Xe}. $\Upsilon$
 represents the proportional rate constant as determined by the multiplication
-of $c_{\ce{^{135}Xe}}^{t}$ and $c^{s}$ whereas $\Theta$ is given by Equation~\ref{eq:Theta_def}. The third row is blank as the abundance of a continuous type
+of $c_{\ce{^{135}Xe}}^{t}$ and $c^{s}$ whereas $\Theta$ is given by Equation \ref{eq:Theta_def}. The third row is blank as the abundance of a continuous type
 stream, $h_{S_{c}}$, does not change over a burn step. The fourth row is an
 addition specific to ADER and not found in the Bateman equations; rather, this
 line, and the lines it represents, exists to keep track of the amount of an
 isotope that a proportional stream moves simply to provide this information
-to the user. The system of matrices seen in Figure~\ref{fig:burn_matrix} is
+to the user. The system of matrices seen in Figure \ref{fig:burn_matrix} is
 solved by SERPENT 2 providing updated isotopic abundances and proportional 
 stream transfer amounts.
 
@@ -823,7 +823,7 @@ stream transfer amounts.
 The Bateman equation Eq.\ref{eq:Bateman} is not a standalone description of the
 isotopic evolution of a nuclear system; rather, it is tightly coupled with the
 scalar neutron flux. Considering that the solution of the system of matrices
-in Figure~\ref{fig:burn_matrix} does not solve for the scalar neutron flux
+in Figure \ref{fig:burn_matrix} does not solve for the scalar neutron flux
 it is clear that the solution, if for nothing else, is an approximation. Many
 nuclear material evolution schemes iterate between solutions of the neutron
 flux and the Bateman equations within the same burnup step---SERPENT 2 is no 

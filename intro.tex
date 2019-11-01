@@ -33,7 +33,7 @@ most notably the xenon isotopes.
 Ivestigations of any nuclear reactor will include an anlysis of the proposed
 fuel cycle. This is accomplished through coupling a transport code with a
 nuclear depletion code. Investigations of MSR fuel cycles are more challenging
-than those of their solid fuel counterparts due to a number of phenomenon: the
+than those of their solid fuel counterparts due to a number of phenomena: the
 removal of various elements through natural processes such as bubbling and
 platting, and the incorporation of operator actions on the reactor fuel stream.
 Unlike light water reactors MSRs tend to operate near atmospheric pressure and
@@ -46,16 +46,16 @@ operation. Secondly this feature allows the reactor operator to make adjustments
 to the liquid fuel salt composition. This is of critical importance as the 
 liquid fuel salt in a MSR will have some desired chemical state
 in which the operator would like to maintain the salt. This is important for two
-key reasons; first to prevent salt components from percipitating out of solution
-should they exceed their solubility limits, and second the corrosion rate of the
-specialty structural nickel/iron alloys is on the order of
+reasons; first to prevent salt components from percipitating out of solution
+should they exceed their solubility limits, and second, the corrosion rate of 
+the specialty structural nickel/iron alloys is on the order of
 micro-meters per year when the reduction potential of the salt is kept near
 a specific value while a slight deviation from this value can raise corrosion
 rates to centimeters per year \cite{Corrosion}. 
 As such, it is in the operator's best interest to keep a tight control over 
 the MSR fuel salt.
 
-Capturing all of these phenomenon in a single nuclear fuel depletion code is
+Capturing all of these phenomena in a single nuclear fuel depletion code is
 non-trivial and raises the question, how does the fuel salt composition in a 
 molten salt fueled reactor change over time in response to both nuclear fuel
 burnup and the reactor operator actions? Addressing this question is the goal
@@ -64,7 +64,7 @@ of the work presented herein.
 \subsection{Framing the problem}
 
 The goal is to create a nuclear fuel depletion model which accounts for the
-physical phenomenon acting on the liquid fuel of a MSR with a flowing fuel core.
+physical phenomena acting on the liquid fuel of a MSR with a flowing fuel core.
 Perhaps the least quanitifed unknown is that of the operator's actions. What are
 the operators objectives? What tools does the operator have at their disposal?
 What are the measures by which the operator assess their actions? As in most
@@ -76,28 +76,108 @@ or maximizing a given value then the choices of the operator may be predicted
 via linear optimization. Ensuring that the problem constraints and optimization 
 targets are all linear strikes a compromise between the ease and reproducibility
 of the optimization solution and the model's adherence to the physical 
-phenomenon being simulated.
+phenomena being simulated.
 
 One goal an operator is stipulated to have is keeping specific chemical
 species within the fuel salt at some relative proportion to some other
 specific chemical species. This goal arrises from the variable solubility of
 chemical species within a given salt mixture - a solubility which changes
 based both on temperature and the relative proportion of other chemical species.
+Despite the complex and often polynomial nature of many chemical solubility
+relationships, within a narrow window these relationships may be approximated
+as linear.
+
 A related objective an operator is stipulated to have is to maintain the fuel
 salt reuction-oxidation (redox) potential at some desired value for corrosion
-prevention as mentioned above. An important goal for all nuclear reactor
-operators is to maintain the multiplication value of the reacting system. These
-considerations here form the general operational contraints of a MSR. A
+prevention as mentioned above. The existence of a temperature gradient within
+the fuel flow loop of many MSR designs ensures that no equilibrium condition of
+disolved ions will exist. As the fuel salt, for example, strips chormium from
+the structural alloys it would be possible for the reduced chromium ions to
+reach such a concentration that the chemical process of corrosion would come to
+a halt as chromium ions were stripped from the alloys as quickly as they
+plate back on. However, as a flowing fuel salt moves through a temperature
+gradient the solubility of various ions changes leading to the precipition of
+these ions onto the cold - and sometimes - hot legs of the fuel loop. Having
+lost these precipitated ions the fuel salt is free to continue corroding
+structural alloys elsewhere in the reactor. As such the traditional means of 
+corrosion prevention - sacrifical anodes, biasing the surface with an electric
+current, and controlling the activity of the corrosive species - are available
+to the MSR operator. Most commonly a reducing agent, such as beryllium metal,
+is added to the salt to balance the often oxidizing nature of fission. In
+this manner the salt redox potential is kept at a point which will inhibit
+corrosion - essentially there is very little free fluorine to pull our chormium
+and a slight exceess of positive ions to catch any new free fluorine which
+fission may produce. Given that this redox potential is dependent on the power,
+specturm, and salt in the reactor its maintence rquires constant attention.
+
+An important goal for all nuclear reactor
+operators is to maintain the multiplication value of the reacting system. In a
+traditional light water reactor this is accomplished by loading the reactor
+core with far more uranium than it needs to be critical and then controlling
+this excess criticality with control rods and in the case of non-boiling water
+reactors, disolvable boron. In these scenarios neutrons which could have
+contributed to power production are lost to control elements. In most, if not
+all, MSR designs the reactors are designed to be operated with almost zero
+excess reactivity, having just enough fissionable material to stay critical for
+a small period of time. Either continually or in batches uranium salt may then
+be added to the flowing fuel salt of the reactor under operation as these fuel
+lines are near atmopsheric pressure and can be accessed. In this way a MSR can
+be kept critical by the operator with fewer neutrons lost to control elements.
+
+An emerging goal, in terms of operational importance, is reactor safeguards or
+the measures put in place to prevent illicit diversion of nuclear materials.
+The traditional approaches to safeguards, namely inspecting and registering
+fuel assemblies before they go in the core and after as well as through their
+storage life, don't even apply to MSRs - there are no fuel assemblies and fuel
+is added in small amounts continusouly straight to the fuel line meaning that
+fissile material is continually accessed, used, and moved. This makes
+accountancy of such material incredibly difficult. Current efforts are examining
+if there are any operational characteristics of MSRs which would provide an
+early indication to plant operators such as a change in the delayed neutron
+fraction in the core or perhaps a change in the chemical redox potential amoung
+other effects. As such, in simulations the ability to model and assess the
+impacts of a small diversion of material is necessary.
+
+These considerations here form the general operational contraints of a MSR. A
 method for simulating the fuel cycle of a MSR must account for all these
-considerations as well as for the physical phenomenon which act on MSRs
+considerations as well as for the physical phenomena which act on MSRs
 uniquely in reference to their solid-fuel counterparts.
 
 Various approaches have been made to create a methodology for simulating MSR
-fuel cyclels. Aufiero approximates nuclear criticality as only being dependent 
+fuel cycles. Given the span of decades which seperate the two major epochs of
+MSR development there exist two distinct groups of methodologies. One, devised
+in the 50s and 60s uses numerous approximation and simplifications and was
+designed in a day when 1MB of memory was what a supercomputer could give you.
+While these methodologies may inspire the works of today the actual prodcuts of
+such are lost to time and the confinement of vaccum tube computers to museums.
+The second was developed begining in the late 90s with more recent efforts in
+the 2010s to further expand the computational base employed by these
+methodologies. A handful of authors of late have proposed approaches for
+simulating MSR fuel cycles. The differences between these approaches tend to
+fall into 3 categories; treatment of the multiplication factor control,
+assumptions regarding fuel chemistry, and the set of possible reactor
+operations.
+
+In one of the most influential MSR fuel cycle papers to be published this
+century, Aufiero unveils a custom modification to the SERPENT 2 code designed to
+assist in the modelling of the European MSFR project \cite{Aufiero}. As all
+developers must Aufiero made certain assumptions in the development of his
+modification. For instance, he
+ approximates nuclear criticality as only being dependent 
 on two isotopes, chosen by the user which can be fed and removed according to 
 the deviation from criticality. To handle salt species considerations Aufiero
 ignores them, simply removing lithium for each fission product produced and
-adding it for each fission product removed \cite{Aufiero}. Betlzer takes a more
+adding it for each fission product removed as seen in equation \ref{eq:auf} 
+\cite{Aufiero}. 
+
+\begin{equation} \label{eq:auf}
+\frac{\partial N_{Li}}{\partial t} = \sum_{j} N_{j} \phi \sigma_{j \rightarrow
+    Li} - \sum_{j} N_{li} \phi \sigma_{Li \rightarrow j} + \sum_{j} N_{j}
+    \lambda_{j} b_{j \rightarrow Li} - \sum_{k = HM} N_{j} \phi \sigma_{kf}
+    \left ( \sum_{l=FP}FY_{k \rightarrow f} \right )
+\end{equation}
+
+Betzler takes a more
 nuanced approach using mass limits on chemical species to spur the injection or
 removal of material
 in a MSR; however, only one isotope is allowed to be specified for nuclear

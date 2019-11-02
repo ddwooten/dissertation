@@ -10,4 +10,7 @@
 *.bak
 *.tar
 *.tgz
-
+*.pdf
+*.bib
+*.sty
+*.def

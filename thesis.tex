@@ -12,7 +12,6 @@
 \usepackage{blkarray}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage[sorting=none,backend=biber]{biblatex}
 \usepackage{color}
 \usepackage[super]{nth}
 \usepackage{tikz}
@@ -60,9 +59,6 @@
 
 \newtheorem{theorem}{Jibberish}
 
-\bibliography{references}
-
-\hyphenation{SERPENT 2}
 \hyphenation{ADDER}
 
 \begin{document}
@@ -152,6 +148,9 @@ Information Officer).}
 \include{results}
 \include{conclusion}
 
+\bibliographystyle{elsarticle-num}
+\bibliography{theory}
+
 \def\StripPrefix#1>{}
 \def\jobis#1{FF\fi
   \def\predicate{#1}%
@@ -161,11 +160,11 @@ Information Officer).}
 }
 
 \if\jobis{thesis}
-  \printbibliography
+  \bibliography{theory}
 \else
   \newpage
   \renewcommand{\thepage}{}
-  \printbibliography
+  \bibliography{theory}
 \fi
 
 %\appendix

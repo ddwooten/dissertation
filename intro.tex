@@ -143,6 +143,8 @@ method for simulating the fuel cycle of a MSR must account for all these
 considerations as well as for the physical phenomena which act on MSRs
 uniquely in reference to their solid-fuel counterparts.
 
+\subsection{Previous Efforts}\label{ssec:efforts}
+
 Various approaches have been made to create a methodology for simulating MSR
 fuel cycles. Given the span of decades which seperate the two major epochs of
 MSR development there exist two distinct groups of methodologies. One, devised
@@ -164,11 +166,12 @@ assist in the modelling of the European MSFR project \cite{Aufiero}. As all
 developers must Aufiero made certain assumptions in the development of his
 modification. For instance, he
  approximates nuclear criticality as only being dependent 
-on two isotopes, chosen by the user which can be fed and removed according to 
-the deviation from criticality. To handle salt species considerations Aufiero
+on two isotopes, chosen by the user which can be fed and removed proportionally
+to the deviation from criticality. To handle salt species considerations Aufiero
 ignores them, simply removing lithium for each fission product produced and
 adding it for each fission product removed as seen in equation \ref{eq:auf} 
-\cite{Aufiero}. 
+where $\phi$ is the scalar neutron flux, and $b$ is the branching ratio
+from isotope $j$ into Li \cite{Aufiero}. 
 
 \begin{equation} \label{eq:auf}
 \frac{\partial N_{Li}}{\partial t} = \sum_{j} N_{j} \phi \sigma_{j \rightarrow
@@ -177,24 +180,62 @@ adding it for each fission product removed as seen in equation \ref{eq:auf}
     \left ( \sum_{l=FP}FY_{k \rightarrow f} \right )
 \end{equation}
 
-Betzler takes a more
-nuanced approach using mass limits on chemical species to spur the injection or
-removal of material
-in a MSR; however, only one isotope is allowed to be specified for nuclear
-criticality control \cite{Betzler}. Ridley ignores salt contituent balance
-but rather choses to deal with the maintence of the redox potential only by
-allowing the injection or removal of fluorine as tailored to a MSR using
-\ce{LiF-BeF_{2}} eutectic salt. With regards to criticality control Ridley
-uses a weighted difference scheme similar to Aufiero but only allowing the use
-of Uranium 235 and 238 \cite{Ridley}. 
+As will be seen in chapter \ref{ch:results} this assumption does not always hold
+given the corrosion concerns of operating an MSR - concens which Aufiero ignores
+entirely. Aufiero's modification allows for the user to re-compile SERPENT to
+make modifications to the nuclear decay constant of any isotope - in effect 
+creating a proportional feed or removal stream. While Aufiero's work was the
+first in the modern millenium to demonstrate the reactivity following aspects
+of an MSR, his modifications to SERPENT 2 proved clunky and inadequate for
+further pursuit.
 
-That which distinguishes this work from its peers is the way in which human 
-actions on the reactor are simulated, via linear optimization in consideration
-of all contraints at once, and by the completness of both the physical model
-and this models integration into a simulation suite.
+In a scripted package Ridley implements an MSR burnup method using SERPENT 2
+wrapped with Python. While Aufiero makes the hard assumption that Lithium is
+removed for fission prodcuts Ridley goes the other direction and makes the
+hard assumption that lithium is added for fission products - the authors
+disagreeing on the oxidative or reducing potential of fission. Other than
+injecting lithium Ridley largely ignores chemistry and corrosion concerns much
+like Aufiero. Again, like Aufireo, Ridley instead focuses on finding the fuel
+feed rate to keep the simulated reactor critical. In his method, at every
+burnup step, Ridley runs dozens of Monte Carlo core simulations to estimate
+the impacts of different feed rates. The proposed package then uses Python to
+fit a polynomial curve to the core reactivity produced by each of the dozens
+of feed rates. From this curve Ridley's method then selects the ``best" feed
+rate and implements this as a batch addition to the fuel before going through
+another SEPRENT Monte Carlo and burnup cycle \cite{Ridley}. 
 
-In the following chapters ADER, the Advanced Depletion Extension for
-Reprocessing, is introduced. First the theory on which ADER is based is
+Betzler takes a different approach overall by adding wrappers and utilites
+to the reactor physics package, SCALE \cite{Betlzer}. 
+Chemistry control of the simulated
+system is handeled by one of these wrappers. Once TRITON has finished simulating
+the system of interest from a neutronics perspective the material compositions
+are passed to this wrapper which adjusts the concentration of specific isotopes
+to fixed user imposed limits. The resulting feeds and removals which would be
+needed to achieve these values are then approximated as a proportional removal
+constant, exactly like Aufiero's work, and then fed to ORIGEN. This wrapper
+system only has the ability to model proportional flows who's constants do not
+change over a burnup step - this necessitates rather small, 3 day, burnup steps
+in order that the proportional constant used does not stray to far from the
+desired result. With regards to criticality control Betzler employ's the crudest
+method of all those seen, iteratively changing the concentration of a single
+user specified isotope and re-running the system simulation to see if the
+desired criticality condition was met. No automated system for addressing
+chemistry control concerns was included with Betzler's approach. 
+
+The approach presented herein consists of a more detailed, customizable, and
+nuanced solution to the question of MSR burnup. This approach, dubed ADER for
+the \textbf{A}dvanced \textbf{D}epletion \textbf{E}xtension for 
+\textbf{R}eprocessing, is a source code moficiation to the popular reactor
+physics code SERPENT 2 which brings to the user the ability to more accurately
+model and simulate MSR physics. ADER allows the user, in an abstracted and
+simplified way, to model chemicals and their interdependant relationships, the
+impact of material flows on system criticality, the driving factors of corrosion
+, and the influences of human decisions on a nuclear system. All of this
+directly integrated into SERPENT 2 with full user support including
+documentation and a full test suite. Behind all of these systems the user may
+see is a linear optimization kernel informing modifications to the SERPENT 2
+burnup kernel.  In the following chapters ADER is introduced. First the theory 
+on which ADER is based is
 presented in chapter \ref{ch:meth} along with its integration into the reactor
 physics monte-carlo code SERPENT 2 \cite{Jaakko}. In chapter
 \ref{ch:simul} the capabilities of ADER are investigated in relation to a

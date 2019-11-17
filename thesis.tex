@@ -17,18 +17,16 @@
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
 \usetikzlibrary{arrows}
-\usetikzlibrary{decorations.pathreplacing}
-\usetikzlibrary{3d,angles,quotes,calc}
+\usetikzlibrary{decorations.pathreplacing, decorations.markings}
+\usetikzlibrary{3d,angles,quotes,calc,shapes}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
 \usepackage[export]{adjustbox} % must be below tikz else tikzplots are scronched
 \usepackage[version=3]{mhchem}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{pst-all}
 
-%For flowcharts
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows}
-\usetikzlibrary{arrows, decorations.markings}
-\usetikzlibrary{positioning}
 
 %For inclusion of figures
 \usepackage{graphicx}
@@ -44,6 +42,54 @@
    preaction = {decorate},
    postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
 \tikzstyle{innerWhite} = [semithick, white,line width=1.4pt, shorten >= 4.5pt]
+
+\newcommand{\CommonElementTextFormat}[4]
+{
+  \begin{minipage}{2.2cm}
+    \centering
+      {\textbf{#1} \hfill #2}%
+      \linebreak \linebreak
+      {\textbf{#3}}%
+      \linebreak \linebreak
+      {{#4}}
+  \end{minipage}
+}
+
+\newcommand{\NaturalElementTextFormat}[4]
+{
+  \CommonElementTextFormat{#1}{#2}{\LARGE {#3}}{#4}
+}
+
+\newcommand{\OutlineText}[1]
+{
+\ifpdf
+  % Couldn't find a nicer way of doing an outline font with TikZ
+  % other than using pdfliteral 1 Tr
+  %
+  \pdfliteral direct {0.5 w 1 Tr}{#1}%
+  \pdfliteral direct {1 w 0 Tr}%
+\else
+  % pstricks can do this with \pscharpath from pstricks
+  %
+  \pscharpath[shadow=false,
+    fillstyle=solid,
+    fillcolor=white,
+    linestyle=solid,
+    linecolor=black,
+    linewidth=.2pt]{#1} 
+\fi
+}
+
+\newcommand{\SyntheticElementTextFormat}[4]
+{
+\ifpdf
+  \CommonElementTextFormat{#1}{#2}{\OutlineText{\LARGE #3}}{#4}
+\else
+  % pstricks approach results in slightly larger box
+  % that doesn't break, so fudge here
+  \CommonElementTextFormat{#1}{#2}{\OutlineText{\Large #3}}{#4}
+\fi
+}
 
 % To compile this file, run "latex thesis", then "biber thesis"
 % (or "bibtex thesis", if the output from latex asks for that instead),

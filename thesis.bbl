@@ -1,0 +1,58 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{ORNL}
+M.~Rosenthal, P.~Haubenreich, R.~Briggs, The development status of molten-salt
+  breeder reactors, Oak Ridge National Laboratory Report 4812.
+
+\bibitem{SAMOFAR}
+V.~Ignatev, Development status of gif msr system, International Atomic Energy
+  Agency Report 49~(45).
+
+\bibitem{Corrosion}
+J.~Koger, Fluoride salt corrosion and mass transfer in high temperature dynamic
+  systems, Corrosion.
+
+\bibitem{Aufiero}
+M.~Aufiero, A.~Cammi, C.~Fiorina, J.~Leppänen, L.~Luzzi, M.~Ricotti, An
+  extended version of the {SERPENT}-2 code to investigate fuel burn-up and core
+  material evolution of the {Molten} {Salt} {Fast} {Reactor}, Journal of
+  Nuclear Materials 441~(1-3) (2013) 473--486.
+\newblock \href {http://dx.doi.org/10.1016/j.jnucmat.2013.06.026}
+  {\path{doi:10.1016/j.jnucmat.2013.06.026}}.
+
+\bibitem{Ridley}
+G.~Ridley, O.~Chvala,
+  \href{http://linkinghub.elsevier.com/retrieve/pii/S030645491730021X}{A method
+  for predicting fuel maintenance in once-through {MSRs}}, Annals of Nuclear
+  Energy 110 (2017) 265--281.
+\newblock \href {http://dx.doi.org/10.1016/j.anucene.2017.06.043}
+  {\path{doi:10.1016/j.anucene.2017.06.043}}.
+\newline\urlprefix\url{http://linkinghub.elsevier.com/retrieve/pii/S030645491730021X}
+
+\bibitem{Betzler}
+B.~Betlzer, J.~Powers, A.~Worrall, Molten salt reactor neutronics and fuel
+  cycle modeling and simulation with scale, Annals of Nuclear Energy 101 (2017)
+  489--503.
+
+\bibitem{Jaakko}
+J.~Leppänen, \href{http://montecarlo.vtt.fi}{{SERPENT} 2}.
+\newline\urlprefix\url{http://montecarlo.vtt.fi}
+
+\bibitem{lougee-heimer_common_2003}
+R.~Lougee-Heimer, The {Common} {Optimization} {INterface} for {Operations}
+  {Research}, IBM Journal of Research and Development 47~(1) (2003) 57--66.
+
+\bibitem{STANFORD}
+D.~Ma, M.~Saunders, Solving multiscale linear programs using the simplex method
+  in quadruple precision, Proceedings in Mathematics \& Statistics 134.
+
+\bibitem{leppanen_burnup_2009}
+J.~Leppänen, M.~Pusa, Burnup calculation capability in the {PSG}2/{Serpent}
+  {Monte} {Carlo} reactor physics code, Proc. M\&C (2009) 3--7.
+
+\end{thebibliography}

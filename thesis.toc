@@ -28,4 +28,5 @@
 \contentsline {subsection}{\numberline {3.0.3}Simulation Input}{47}
 \contentsline {chapter}{\chapternumberline {4}Conclusions and Future Work}{60}
 \contentsline {chapter}{\chapternumberline {5}ADER's API}{62}
-\contentsline {chapter}{\chapternumberline {6}Appendix A: API}{131}
+\contentsline {chapter}{\chapternumberline {6}ADER's User Manual}{131}
+\contentsline {chapter}{Bibliography}{166}

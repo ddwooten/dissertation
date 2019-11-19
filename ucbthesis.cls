@@ -533,7 +533,13 @@ by\par
 \vspace{.1in}
 \@author\par
 \vspace{.1in}
-{\@degree} in \@field\par
+{\@degree} in 
+{\@field}\par
+\ifdefined\@emphasis
+  and the Designated Emphasis\par
+  in\par
+  {\@emphasis}\par
+\fi
 \vspace{.1in}
 University of California, {\@campus}\par
 \vspace{.1in}

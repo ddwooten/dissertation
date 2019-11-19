@@ -8,8 +8,11 @@
 
 \documentclass{ucbthesis}
 \usepackage[dvipdfmx]{graphicx} % needs to be up top
+\usepackage{float}
+\usepackage{sverb}
 \usepackage{bmpsize}
 \usepackage{blkarray}
+\usepackage{pdfpages}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{color}
@@ -30,6 +33,11 @@
 
 %For inclusion of figures
 \usepackage{graphicx}
+
+\graphicspath{{/home/ddwooten/Dropbox/Dans_Stuff/Documents/UCB/dissertation/img/}}
+\usepackage{epspdfconversion}
+
+\epstopdfsetup{outdir={/home/ddwooten/Dropbox/Dans_Stuff/Documents/UCB/dissertation/img/}}
 
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1.0cm, text centered, draw=black, fill=lightgray]
 \tikzstyle{process} = [rectangle, minimum width=6cm, minimum height=1.0cm, text width = 5cm, text centered, draw=black, fill=lightgray]
@@ -119,9 +127,8 @@ Reactors}
 \degree{Doctor of Philosophy}
 \chair{Assistant Professor Massamiliano Fratoni}
 \othermembers{
-	Associate Professor Per-Olof Persson \\
-	Professor Jasmina Vuji\'c \\
-	Dr. Steven P. Hamilton
+	Assistant Professor Rachael Slaybaugh \\
+	Professor James Demmel \\
 	}
 \numberofmembers{4}
 \field{Engineering -- Nuclear Engineering}
@@ -163,7 +170,7 @@ of Energy under Award Number(s) DE-NEXXXXXX.
 This material is based upon work supported under a Nuclear Regulatory 
 Commission Fellowship under Award Number(s) DE-NEXXXXXX. 
 This material is based upon work supported under a Nuclear Science and Security 
-Cosortium Fellowship under Award Number(s) DE-NEXXXXXX. 
+Consortium Fellowship under Award Number(s) DE-NEXXXXXX. 
 This report was prepared as an account  of work sponsored by an agency of the 
 United States Government. Neither the United 
 States Government nor any agency thereof, nor any of their employees, makes any 
@@ -189,10 +196,13 @@ Information Officer).}
 % (Optional) \part{First Part}
 
 \include{intro}
-\include{background}
+%\include{background}
 \include{method}
 \include{results}
 \include{conclusion}
+\include{appendixA}
+\include{appendixB}
+%\include{appendixC}
 
 \bibliographystyle{elsarticle-num}
 \bibliography{theory}

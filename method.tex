@@ -270,10 +270,10 @@ optimality placed on a material.
 Say, for example, that a material is desired to have three to four times as
 much eutectic FLiBe salt to uranium fluoride salts, both 
 uranium trifluoride and tetrafluoride. Additionally, it is desired that uranium
-tetrafluoride be more than 100 times as abundant as uranium trifluroide. Setting
+tetrafluoride be more than 100 times as abundant as uranium trifluoride. Setting
 these as constraints for the material can be accomplished with four groups and
 two relative abundance constraints. The following groups are needed: a uranium 
-trifluoride group, a uranium tetrafluoride group, a uranium flouride group 
+trifluoride group, a uranium tetrafluoride group, a uranium fluoride group 
 obtained as a summation of the previous groups, and a FLiBe group. 
 A relative abundance constraint is placed between
 the FLiBe group and the uranium fluoride group, and a relative
@@ -607,6 +607,7 @@ optimization target.
             \end{block}
         \end{blockarray}
     \end{equation*}
+    Figure 3.2.6: A depiction of the Simplex optimization matrix.
 
 \begin{equation}
 \label{eq:upsilon_bound}
@@ -659,7 +660,7 @@ may reduce the degree to which the actual composition diverges from the ideal
 composition.
 
 The greatest limitation of the solution turns out not to be related to the
-physics of the problem - but the physics of computers. As put foward in 
+physics of the problem - but the physics of computers. As put forward in 
 \cite{STANFORD} the limitations of machine precision become critical in
 SIMPLEX algorithms written with 64 bits or less of precision and with
 variables having magnitudes at or lower than $10^(-6)$. This issue is easily
@@ -679,14 +680,14 @@ operation has passed.
 
 Any linear transformation applied to the optimization problem preserves the
 overall problem of $x >>> y$ where $x$ and $y$ are given values in the
-opimization problem. Furthermore, in many nuclear simulations several isotopes
+optimization problem. Furthermore, in many nuclear simulations several isotopes
 have significant importance to the purpose of the simulations and yet routinely
 have atomic densities below $10^(-6)$ relative to their host material atomic
 density - \ce{^{6}Li} being a common example.
 
 Considering the limitations of machine precision on the efficacy of ADER, until
 a SIMPLEX algorithm employing quadruple or higher precision for floating point
-arithmatic is incorporated ADER must be considered stochastically functional
+arithmetic is incorporated ADER must be considered stochastically functional
 --- certainly a less than optimal state. 
 
 
@@ -852,6 +853,22 @@ does not
 interact with Serpent 2 burnup iterations schemes. A flowchart roughly outlining
 SERPENT 2 and ADER interaction is seen in Figure \ref{fig:flow_chart}.
 
+\subsection{Algorithm implementation} \label{ssec:algorithm}
+Concerning the software engineering aspects of ADER's creation the most 
+useful resources to any curious individual are the API, user manual, and
+source code provided in appendices \ref{app:api}, \ref{app:um}, \ref{app:src}
+respectively. ADER was developed in a test-driven environment and as such
+has more than 150 unit tests supporting its development as found in the file
+\texttt{testcases.c}. More than a dozen integration tests can be found
+within the code contained in functions which begin with the prefix
+\texttt{TEST}. Lastly, more than 20 system tests can be found online
+at \verb|www.github.com/ddwooten/ADER_pub/System_Testing/|. ADER's
+directory structure includes no levels below the \texttt{/src} folder as
+the parent project, SERPENT 2, does not either. ADER's code style adheres
+closely to that of SERPENT 2 but adopts a more readable use of white space.
+The input for ADER is directly integrated into the SERPENT 2 input and uses
+the same style.
+ 
 \begin{figure} \label{fig:flow_chart}
 \begin{centering}
 \begin{tikzpicture}[node distance = 1.5cm, every text node part/.style={font=\small}]

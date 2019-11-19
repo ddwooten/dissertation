@@ -1,0 +1,507 @@
+% ------ Created November, 26th, 2018, by Daniel D. Wooten
+% ------ Comments
+% ------ << 
+% ------ > 
+% ------ >> 
+
+set title "TCO"
+
+% --- Surfaces 
+
+% ------ Reactor Core
+surf    1 cube   0 0   0   100 
+
+% --- Cells
+cell    11      0       fuel           -1
+cell    21      0       outside         1
+
+% --- Materials
+
+mat fuel -3.3052 vol 1E6 ader burn 0 cnd Cfuel rhow 1.0
+3006.06c    0.00001421
+3007.06c    0.28425216
+4009.06c    0.06338586
+9019.06c    0.60408583
+90232.06c   0.04288894
+92233.09c   0.00476985
+
+% ---- Materials for detectors
+
+mat dLi6    1.0 3006.06c 1.0
+mat dLi7    1.0 3007.06c 1.0
+mat dBe9    1.0 4009.06c 1.0
+mat dC12    1.0 6012.06c 1.0
+mat dF19    1.0 9019.06c 1.0
+mat dTh232  1.0 90232.06c 1.0
+mat dU233   1.0 92233.06c 1.0
+
+% --- End materials for detectors
+
+%--- Detectors
+det 1   dm  fuel
+det 2   dm  fuel    dr  -2  dLi6    dt  3   1
+det 3   dm  fuel    dr  -2  dLi7    dt  3   1
+det 4   dm  fuel    dr  -2  dBe9    dt  3   1
+det 5   dm  fuel    dr  -2  dF19    dt  3   1
+det 6   dm  fuel    dr  -2  dTh232  dt  3   1
+det 7   dm  fuel    dr  -2  dU233   dt  3   1
+det 8   dm  fuel    dr  18  dU233   dt  3   1
+det 9   dm  fuel    de  lgrid   dt  -3
+det 10   dm  fuel    dr  -2  dLi6    dt  3   1 de egrid  
+det 11  dm  fuel    dr  -2  dLi7    dt  3   1 de egrid
+det 12  dm  fuel    dr  -2  dF19    dt  3   1 de egrid  
+det 13  dm  fuel    dr  -2  dTh232  dt  3   1 de egrid
+det 14  dm  fuel    dr  -2  dU233   dt  3   1 de egrid
+det 15  dm  fuel    dr  18  dU233   dt  3   1 de egrid
+
+ene lgrid 3 200 1E-10   3
+ene egrid 4 cas70
+
+% --- End Detectors
+
+% ------ Groups
+
+grp gLi
+Li  1
+
+grp gLiS
+Li  1
+
+grp gAllLi  sum
+gLi 1
+gLiS 1
+
+grp gLi6
+Li  1 isos 1
+Li-6    1
+
+grp gLi7
+Li  1 isos 1
+Li-7    1
+
+grp gBe
+Be  1   
+
+grp gC
+C   1
+
+grp gCo
+C   1
+
+grp gF-li
+F   1
+
+grp gF-be
+F   1
+
+grp gF-th
+F   1
+
+grp gF-u
+F   1
+
+grp gTh232
+Th  1   isos    1
+Th-232  1
+
+grp gU
+U   1
+
+grp gUF4i
+U   1 isos 1
+U-233 1
+F   4   isos    1
+F-19    1
+
+grp gThF4i
+Th   1 isos 1
+Th-232 1
+F   4   isos    1
+F-19    1
+
+grp gLii
+Li  1 isos 2
+Li-6    5
+Li-7    99995
+
+grp gBei
+Be  1   isos    1
+Be-9    1
+
+grp gCi
+C  1   isos    1
+C-12    1
+
+grp gFi
+F   1   isos    1
+F-19    1
+
+grp gLiFo
+Li  1 
+F   1
+
+grp gBeF2o
+Be  1  
+F   2
+
+grp gFo
+F   1  
+
+grp gThF4o
+Th  1 
+F   4 
+
+grp gUF4o
+U   1 
+F   4
+
+grp gF
+F   1
+
+grp gAllF   sum
+gF-li   1
+gF-be   1
+gF-th   1
+gF-u    1
+gF      1
+
+% ------ End of Groups
+
+% ------ Conditions section
+
+conditions Cfuel
+rng gLiS  min 0.26 max 0.30
+rng gLi min 0.0 max 1.0
+rng gAllLi  min 0.0 max 1.0
+rto gF-li  val 1 grp2 gLiS
+rng gBe min 0.061 max 0.065
+rto gF-be val 2 grp2 gBe
+rto gF-th val 4 grp2 gTh232
+rto gF-u val 4 grp2 gU
+rng gAllF   min 0.0 max 1.0
+rng gF min 0.0 max 1.0
+preserve mols
+cnt cnt_table
+oxi oxid_control min -0.0002  max -0.0001
+opt dir min type action streams 
+
+% ------ End of Conditions Section
+
+% ------ Control Section
+
+control cnt_table
+Li
+Be
+C
+F
+Th-232
+U
+
+% ------ End of Control Section
+
+% ------ Begining of Feed/Removal/Redox/Reac section
+
+stream to fuel group gLii      type    feed    form   cont 
+stream from fuel group gLiFo      type    remv    form   cont 
+stream to fuel group gBei       type    feed    form   cont 
+stream from fuel group gBeF2o   type    remv    form   cont 
+stream to fuel group gFi        type    feed    form   cont 
+stream from fuel group gFo        type    remv    form   cont 
+stream to fuel group gThF4i    type    reac    form   cont 
+stream from fuel group gThF4o    type    reac    form   cont 
+stream to fuel group gUF4i     type    reac    form   cont 
+stream from fuel group gUF4o    type    reac    form   cont 
+stream from fuel rem proc    type    remv    form    cont frac  2.19795529E-09  
+stream from fuel rem natural_rem    type    remv    form    prop  frac 0.023105
+
+
+% ------ End of Streams 
+
+% ------ Table-class stream definitions
+
+removal natural_rem
+He  1
+Ne  1
+Ar  1
+Kr  1
+Nb  1
+Mo  1
+Tc  1
+Ru  1
+Rh  1
+Pd  1
+Ag  1
+Sb  1
+Te  1
+Xe  1
+Rn  1
+
+removal proc
+B  1
+N   1
+C   1
+O   1
+Na  1
+Mg  1
+Al  1
+Si  1
+P   1
+S   1
+Cl  1
+K   1
+Ca  1
+Sc  1
+Ti  1
+V   1
+Cr  1
+Mn  1
+Fe  1
+Co  1
+Ni  1
+Cu  1
+Lu  1
+Hf  1
+Ta  1
+W   1
+Re  1
+Os  1
+Ir  1
+Pt  1
+Au  1
+Hg  1
+Tl  1
+Pb  1
+Bi  1
+Po  1
+At  1
+Fr  1
+Ra  1
+Lr  1
+Rf  1
+Db  1
+Sg  1
+Bh  1
+Hs  1
+Mt  1
+Ac  1
+Pa  1
+Zn 1
+Ga 1
+Ge 1
+As 1
+Se 1
+Br 1
+Rb 1
+Sr 1
+Y  1
+Zr 1
+Cd 1
+In 1
+Sn 1
+I  1
+La 1
+Ce 1
+Pr 1
+Nd 1
+Pm 1
+Sm 1
+Eu 1
+Gd 1
+Tb 1
+Dy 1
+Ho 1
+Er 1
+Tm 1
+Yb 1
+Cs 1
+Ba 1
+
+% --- Oxidation Table
+
+oxidation oxid_control
+H   1
+Li  1
+Na  1
+K   1
+Rb  1
+Cs  1
+Fr  1
+Be  2
+Mg  2
+Ca  2
+Sr  2
+Ba  2
+Ra  2
+Sc  3
+Y   3
+Ti  4
+Zr  4
+Hf  4
+Rf  4
+V   5
+Nb  5
+Ta  5
+Db  5
+Cr  3
+Mo  4
+W   4
+Sg  6
+Mn  2
+Tc  4
+Re  4
+Bh  7
+Mn  2
+Tc  4
+Re  4
+Bh  7
+Fe  2
+Ru  3
+Os  4
+Hs  8
+Co  2
+Rh  3
+Ir  3
+Mt  7
+Ni  2
+Pd  2
+Pt  2
+Ds  6
+Cu  2
+Ag  1
+Au  3
+Rg  5
+Zn  2
+Cd  2
+Hg  1
+B   3
+Al  3
+Ga  3
+In  3
+Ti  1
+C   4
+Si  4
+Ge  4
+Sn  4
+Pb  2
+N   3
+P   3
+As  3
+Sb  3
+Bi  3
+O   -2
+S   -2
+Se  -2
+Te  -2
+Po  -2
+F   -1
+Cl  -1
+Br  -1
+I   -1
+At  -1
+He  0
+Ne  0
+Ar  0
+Kr  0
+Xe  0
+Rn  0
+La  3
+Ce  3
+Pr  3
+Nd  3
+Pm  3
+Sm  3
+Eu  2
+Gd  3
+Tb  3
+Dy  3
+Ho  3
+Er  3
+Tm  3
+Yb  3
+Lu  3
+Ac  3
+Th  4
+Pa  4
+U   4
+Nb  4
+Pu  4
+Am  4
+Cm  4
+Bk  4
+Cf  4
+Es  4
+Fm  4
+Md  4
+No  4
+Lr  3
+
+% --- End Oxidation Table 
+
+% --- Boundary condition
+
+set bc 3
+
+% --- Neutron population and criticality cycles:
+
+set pop 10000 40 60 
+
+% --- Fission Product Cut Off
+
+set fpcut 1E-8
+
+% --- Stable Nuclide Cut Off
+
+set stabcut 1E-12
+
+% --- Set Burnup Solution Method ( CRAM )
+
+set bumode 2
+
+% --- Set Predictor Corrector Usage
+
+set pcc "LELI" [1 1]
+
+% --- Set flux for burnup
+
+set power 1E+8
+
+% --- Set Inventory for Burnup Report
+
+set inventory all
+
+% --- Set xscalc mode
+
+set xscalc 1
+
+% --- Set materials printing mode
+
+set printm 1
+
+% --- Set Optimization Mode
+
+set opti 4
+
+% --- Bunup Intervals
+
+dep daystep
+1
+1
+2
+3
+5
+8
+13
+21
+34
+...
+34
+
+
+% ------ ADER Reactivity Targets
+kmin 1.0000000
+kmax 1.0100000
+
+% ------ ADER Iteration Set
+set ader_trans_iter 1
+
+% --- Plot

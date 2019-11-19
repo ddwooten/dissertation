@@ -9,7 +9,7 @@ conducted at Oak Ridge National Laboratory ( ORNL ) during the 1960s and 70s
 program molten salt studies continued at ORNL under the Molten Salt Breeder
 Reactor program through the 1970s and into the 80s \cite{ORNL-MSBR}. After a
 brief lull in global interest during the late 80s and early 90s studies in MSRs
-began again in ernest in Europe begining with the SAMOFAR program and continuing
+began again in earnest in Europe beginning with the SAMOFAR program and continuing
 today under the ALISIA program \cite{SAMOFAR}. Since this time global interest
 in MSRs has continued to grow with concepts coming from all corners of the
 globe from both industry and governments: the Molten Salt Actinide Recycler and
@@ -18,19 +18,19 @@ the Liquid Fueled Thorium Molten Salt Reactor ( LF-TMSR ) out of China, the
 Molten Salt Fast Chloride Reactor ( MCFR ) from TerraPower in the United States,
 and many others.
 
-This global interest is due to molten salt's many promising chracteristics such
+This global interest is due to molten salt's many promising characteristics such
 as high operating temperatures, low operating pressures ( near atmospheric in
-most cases ), excellent safety charachteristics, and high fuel utilization just
+most cases ), excellent safety characteristics, and high fuel utilization just
 to name the top few. Many of these same characteristics create obstacles to 
 modelling MSRs with today's computational tools due to the many physical
-differences between MSRs and todays more numerous solid fuel light water
-reactors. The key differnce and originator of the challenges is that the fuel
+differences between MSRs and today's more numerous solid fuel light water
+reactors. The key difference and originator of the challenges is that the fuel
 in a MSR is liquid and often flows through the core of the vessel and through
 a heat exchanger. This flow of fuel induces many effects such as the drift of
-delayed neutron precurssors and the bubbling out of gaseous fission products,
+delayed neutron precursors and the bubbling out of gaseous fission products,
 most notably the xenon isotopes.
 
-Ivestigations of any nuclear reactor will include an anlysis of the proposed
+Investigations of any nuclear reactor will include an analysis of the proposed
 fuel cycle. This is accomplished through coupling a transport code with a
 nuclear depletion code. Investigations of MSR fuel cycles are more challenging
 than those of their solid fuel counterparts due to a number of phenomena: the
@@ -46,7 +46,7 @@ operation. Secondly this feature allows the reactor operator to make adjustments
 to the liquid fuel salt composition. This is of critical importance as the 
 liquid fuel salt in a MSR will have some desired chemical state
 in which the operator would like to maintain the salt. This is important for two
-reasons; first to prevent salt components from percipitating out of solution
+reasons; first to prevent salt components from precipitating out of solution
 should they exceed their solubility limits, and second, the corrosion rate of 
 the specialty structural nickel/iron alloys is on the order of
 micro-meters per year when the reduction potential of the salt is kept near
@@ -65,12 +65,12 @@ of the work presented herein.
 
 The goal is to create a nuclear fuel depletion model which accounts for the
 physical phenomena acting on the liquid fuel of a MSR with a flowing fuel core.
-Perhaps the least quanitifed unknown is that of the operator's actions. What are
+Perhaps the least quantified unknown is that of the operator's actions. What are
 the operators objectives? What tools does the operator have at their disposal?
 What are the measures by which the operator assess their actions? As in most
-simulation problems the variable of most varience here is the human. To
-approximate the human in this model they are repalaced with a linear opimization
-routine. If the constrainsts facing the operator may be approximated with linear
+simulation problems the variable of most variance here is the human. To
+approximate the human in this model they are replaced with a linear optimization
+routine. If the constraints facing the operator may be approximated with linear
  relationships and if the operator's desires may be approximated as minimizing
 or maximizing a given value then the choices of the operator may be predicted
 via linear optimization. Ensuring that the problem constraints and optimization 
@@ -80,7 +80,7 @@ phenomena being simulated.
 
 One goal an operator is stipulated to have is keeping specific chemical
 species within the fuel salt at some relative proportion to some other
-specific chemical species. This goal arrises from the variable solubility of
+specific chemical species. This goal arises from the variable solubility of
 chemical species within a given salt mixture - a solubility which changes
 based both on temperature and the relative proportion of other chemical species.
 Despite the complex and often polynomial nature of many chemical solubility
@@ -88,27 +88,27 @@ relationships, within a narrow window these relationships may be approximated
 as linear.
 
 A related objective an operator is stipulated to have is to maintain the fuel
-salt reuction-oxidation (redox) potential at some desired value for corrosion
+salt reduction-oxidation (redox) potential at some desired value for corrosion
 prevention as mentioned above. The existence of a temperature gradient within
 the fuel flow loop of many MSR designs ensures that no equilibrium condition of
-disolved ions will exist. As the fuel salt, for example, strips chormium from
+dissolved ions will exist. As the fuel salt, for example, strips chromium from
 the structural alloys it would be possible for the reduced chromium ions to
 reach such a concentration that the chemical process of corrosion would come to
 a halt as chromium ions were stripped from the alloys as quickly as they
 plate back on. However, as a flowing fuel salt moves through a temperature
-gradient the solubility of various ions changes leading to the precipition of
+gradient the solubility of various ions changes leading to the precipitation of
 these ions onto the cold - and sometimes - hot legs of the fuel loop. Having
 lost these precipitated ions the fuel salt is free to continue corroding
 structural alloys elsewhere in the reactor. As such the traditional means of 
-corrosion prevention - sacrifical anodes, biasing the surface with an electric
+corrosion prevention - sacrificial anodes, biasing the surface with an electric
 current, and controlling the activity of the corrosive species - are available
 to the MSR operator. Most commonly a reducing agent, such as beryllium metal,
 is added to the salt to balance the often oxidizing nature of fission. In
 this manner the salt redox potential is kept at a point which will inhibit
-corrosion - essentially there is very little free fluorine to pull our chormium
-and a slight exceess of positive ions to catch any new free fluorine which
+corrosion - essentially there is very little free fluorine to pull our chromium
+and a slight excess of positive ions to catch any new free fluorine which
 fission may produce. Given that this redox potential is dependent on the power,
-specturm, and salt in the reactor its maintence rquires constant attention.
+spectrum, and salt in the reactor its maintenance requires constant attention.
 
 An important goal for all nuclear reactor
 operators is to maintain the multiplication value of the reacting system. In a
@@ -121,7 +121,7 @@ all, MSR designs the reactors are designed to be operated with almost zero
 excess reactivity, having just enough fissionable material to stay critical for
 a small period of time. Either continually or in batches uranium salt may then
 be added to the flowing fuel salt of the reactor under operation as these fuel
-lines are near atmopsheric pressure and can be accessed. In this way a MSR can
+lines are near atmospheric pressure and can be accessed. In this way a MSR can
 be kept critical by the operator with fewer neutrons lost to control elements.
 
 An emerging goal, in terms of operational importance, is reactor safeguards or
@@ -129,16 +129,16 @@ the measures put in place to prevent illicit diversion of nuclear materials.
 The traditional approaches to safeguards, namely inspecting and registering
 fuel assemblies before they go in the core and after as well as through their
 storage life, don't even apply to MSRs - there are no fuel assemblies and fuel
-is added in small amounts continusouly straight to the fuel line meaning that
+is added in small amounts continuously straight to the fuel line meaning that
 fissile material is continually accessed, used, and moved. This makes
 accountancy of such material incredibly difficult. Current efforts are examining
 if there are any operational characteristics of MSRs which would provide an
 early indication to plant operators such as a change in the delayed neutron
-fraction in the core or perhaps a change in the chemical redox potential amoung
+fraction in the core or perhaps a change in the chemical redox potential among
 other effects. As such, in simulations the ability to model and assess the
 impacts of a small diversion of material is necessary.
 
-These considerations here form the general operational contraints of a MSR. A
+These considerations here form the general operational constraints of a MSR. A
 method for simulating the fuel cycle of a MSR must account for all these
 considerations as well as for the physical phenomena which act on MSRs
 uniquely in reference to their solid-fuel counterparts.
@@ -146,13 +146,13 @@ uniquely in reference to their solid-fuel counterparts.
 \subsection{Previous Efforts}\label{ssec:efforts}
 
 Various approaches have been made to create a methodology for simulating MSR
-fuel cycles. Given the span of decades which seperate the two major epochs of
+fuel cycles. Given the span of decades which separate the two major epochs of
 MSR development there exist two distinct groups of methodologies. One, devised
 in the 50s and 60s uses numerous approximation and simplifications and was
 designed in a day when 1MB of memory was what a supercomputer could give you.
-While these methodologies may inspire the works of today the actual prodcuts of
-such are lost to time and the confinement of vaccum tube computers to museums.
-The second was developed begining in the late 90s with more recent efforts in
+While these methodologies may inspire the works of today the actual products of
+such are lost to time and the confinement of vacuum tube computers to museums.
+The second was developed beginning in the late 90s with more recent efforts in
 the 2010s to further expand the computational base employed by these
 methodologies. A handful of authors of late have proposed approaches for
 simulating MSR fuel cycles. The differences between these approaches tend to
@@ -181,17 +181,17 @@ from isotope $j$ into Li \cite{Aufiero}.
 \end{equation}
 
 As will be seen in chapter \ref{ch:results} this assumption does not always hold
-given the corrosion concerns of operating an MSR - concens which Aufiero ignores
+given the corrosion concerns of operating an MSR - concerns which Aufiero ignores
 entirely. Aufiero's modification allows for the user to re-compile SERPENT to
 make modifications to the nuclear decay constant of any isotope - in effect 
 creating a proportional feed or removal stream. While Aufiero's work was the
-first in the modern millenium to demonstrate the reactivity following aspects
+first in the modern millennium to demonstrate the reactivity following aspects
 of an MSR, his modifications to SERPENT 2 proved clunky and inadequate for
 further pursuit.
 
 In a scripted package Ridley implements an MSR burnup method using SERPENT 2
 wrapped with Python. While Aufiero makes the hard assumption that Lithium is
-removed for fission prodcuts Ridley goes the other direction and makes the
+removed for fission products Ridley goes the other direction and makes the
 hard assumption that lithium is added for fission products - the authors
 disagreeing on the oxidative or reducing potential of fission. Other than
 injecting lithium Ridley largely ignores chemistry and corrosion concerns much
@@ -204,10 +204,10 @@ of feed rates. From this curve Ridley's method then selects the ``best" feed
 rate and implements this as a batch addition to the fuel before going through
 another SEPRENT Monte Carlo and burnup cycle \cite{Ridley}. 
 
-Betzler takes a different approach overall by adding wrappers and utilites
+Betzler takes a different approach overall by adding wrappers and utilities
 to the reactor physics package, SCALE \cite{Betlzer}. 
 Chemistry control of the simulated
-system is handeled by one of these wrappers. Once TRITON has finished simulating
+system is handled by one of these wrappers. Once TRITON has finished simulating
 the system of interest from a neutronics perspective the material compositions
 are passed to this wrapper which adjusts the concentration of specific isotopes
 to fixed user imposed limits. The resulting feeds and removals which would be
@@ -223,12 +223,12 @@ desired criticality condition was met. No automated system for addressing
 chemistry control concerns was included with Betzler's approach. 
 
 The approach presented herein consists of a more detailed, customizable, and
-nuanced solution to the question of MSR burnup. This approach, dubed ADER for
+nuanced solution to the question of MSR burnup. This approach, dubbed ADER for
 the \textbf{A}dvanced \textbf{D}epletion \textbf{E}xtension for 
-\textbf{R}eprocessing, is a source code moficiation to the popular reactor
+\textbf{R}eprocessing, is a source code modification to the popular reactor
 physics code SERPENT 2 which brings to the user the ability to more accurately
 model and simulate MSR physics. ADER allows the user, in an abstracted and
-simplified way, to model chemicals and their interdependant relationships, the
+simplified way, to model chemicals and their interdependent relationships, the
 impact of material flows on system criticality, the driving factors of corrosion
 , and the influences of human decisions on a nuclear system. All of this
 directly integrated into SERPENT 2 with full user support including

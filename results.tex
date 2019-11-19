@@ -2,27 +2,29 @@
 \label{sec:results}
 
 Given the limitations outlined in section \ref{ssec:sol}, presently the ability
-to do any kind of serious systems analysis with ADER is almost non-existant due
+to do any kind of serious systems analysis with ADER is almost non-existent due
 to the numerical stability issues inherent to the solution algorithm. Despite
-this some configuations of system parameters may be found such that a simple
+this some configurations of system parameters may be found such that a simple
 and limited simulation can be run to a sufficiently long time horizon to see
 equilibrium within the fuel cycle.
 
-\subsection{Simulation Setup}
-The system configuation described in this section with corresponding SERPENT 2
-input provided in Appendix \ref{app:input}. In short the simulation consisted
-of an infinite and homogenous salt mixture, 71.8 mol-\% \ce{LiF}, 16 mol-\%
-\ce{BeF2}, 10.8 mol-\% \ce{ThF4}, and 1.2 mol-\% \ce{^{233}UF4}. The starting
+\subsection{Simulation Setup}\label{ssec:setup}
+The system configuration is described in this section with corresponding 
+SERPENT 2
+input provided in section \ref{ssec:input}. In short the simulation consisted
+of an infinite and homogeneous salt mixture, 71.8 mol-\% \ce{LiF}, 16 mol-\%
+\ce{BeF2}, 10.8 mol-\% \ce{ThF4}, and 1.2 mol-\% \ce{^{233}UF4} - the startup
+fuel for the Oak Ridge Molten Salt Reactor Experiment \cite{ORNL}. The starting
 lithium load was enriched to 99.995 \% \ce{^{7}Li}. The lithium
-fraction of the homogenous mixture was constrained to be between 0.26 and 0.30
+fraction of the homogeneous mixture was constrained to be between 0.26 and 0.30
 using a range restriction. The total amount of lithium within the system was
 tracked using a catch-all elemental group and a total summation group counting
 both the lithium acting as a primary salt constituent and the lithium which may
-be free or bound to fission products within the system. Seperate groups of
+be free or bound to fission products within the system. Separate groups of
 elemental fluorine are used in ratio restrictions to impose chemical binding 
-constraints on the Li, Be, Th, and U within the salt mixture. A free elmental
+constraints on the Li, Be, Th, and U within the salt mixture. A free elemental
 group of fluorine as well as a total fluorine summation group are used to track
-total system fluorine. An elemental beryillium group constrains beryillium to
+total system fluorine. An elemental beryllium group constrains beryllium to
 between 6.1 mol-\% and 6.5 mol-\%. The molar fractions of \ce{ThF4} as well
 as \ce{UF4} - all uranium is assumed to be uranium-IV - are left free to vary
 as ADER chooses. An oxidation range of $[-0.0002, -0.0001]$ is used to ensure
@@ -30,14 +32,14 @@ a reductive environment within the salt with each element's assumed oxidation
 sate within the salt visually depicted in Figure \ref{periodic}. 
 A mass balance is applied to the
 system such that inflows must be equal, in number of mols, to outflows. Any
-lithium, beryillium, fluorine, thorium-232, and uranium are required to be
-represented in a group stucture during the linear optimziation. The
+lithium, beryllium, fluorine, thorium-232, and uranium are required to be
+represented in a group structure during the linear optimization. The
 optimization target is set as the minimization of total gross flows.
 
 The stream modelling natural removal removes the following elements into an 
 infinite sink with a 30 second effective-half-life: He, Ne, Ar, Kr, Nb,
 Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te, Xe, and Rn. Those elements in the gas phase
-given MSR operating temperatures and pressures - around one atomosphere and
+given MSR operating temperatures and pressures - around one atmosphere and
 generally between 550 $^{\circ}$ C and 800 $^{\circ}$ C - do not remain in
 the salt and generally bubble out either in a Helium gas bubble trap or in the
 pump bowl. The remaining elements in the natural removal stream are considered
@@ -47,13 +49,13 @@ effective half-life captures these physical effects well. Figure
 \ref{fig:periodic} provides a visual depiction of the natural removal stream,
 the reprocessing stream, as well as the assumed oxidation state of each element
 in the salt which is seen in the upper right corner of each element's box and
-for which a number not preceeded by a minus sign indicates an oxidized state.
+for which a number not preceded by a minus sign indicates an oxidized state.
 All elements, other than the chalcogens and halogens, are assumed to be in 
 their highest oxidation state unless operational data from \cite{ORNL} 
 indicates otherwise.
 
 The stream modelling the reprocessing of the fuel salt removes the following
-elements into an infinte sink: B, N, C, O, Na, Mg, Al, Si, P, S, Cl, K, Ca, Sc,
+elements into an infinite sink: B, N, C, O, Na, Mg, Al, Si, P, S, Cl, K, Ca, Sc,
 Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Lu, Hf, Ta, W, Re, Os, Ir, Pt, Au, Hg, Tl, Pb,
 Bi, Po, At, Fr, Ra, Lr, Rf, Db, Sg, Bh, Hs, Mt, Ac, Pa, Zn, Ga, Ge, As, Se, Br,
 Rb, Sr, Y, Zr, Cd, In, Sn, I, La, Ce, Pr, Nd, Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er,
@@ -63,7 +65,7 @@ abundance is removed every 10 years.
 The remaining streams in this simulation are all group-class streams whose
 quantity is determined on a per burnup step basis by the linear optimization
 routine. All of these remaining streams inject or remove their assigned quantity
-of material at a continuous and unchange rate with respect to time. These
+of material at a continuous and unchanged rate with respect to time. These
 remaining streams are a lithium injection stream enriched to 99.995 \% 
 \ce{^{7}Li}, an elemental \ce{LiF} removal stream, a \ce{^{9}Be} injection
 stream, an elemental \ce{BeF2} removal stream, a \ce{^{19}F} injection stream, 
@@ -72,14 +74,17 @@ elemental \ce{ThF4} removal stream, a \ce{^{233}UF4} injection stream, and an
 elemental \ce{UF4} removal stream.
 
 With regards to simulation parameters, the burnup steps were measured in days
-and grew in length according to the Fibbonici sequence up to 34 days at which
+and grew in length according to the Fibonacci sequence up to 34 days at which
 each remaining burnup step was kept to 34 days. The minimum and maximum 
-neutron mulitication factor targets were 1.0 and 1.01 respectively. A linear
+neutron multiplication factor targets were 1.0 and 1.01 respectively. A linear
 extrapolation and interpolation scheme was selected for the nuclear cross
 sections used in the standard CRAM burnup calculation. All possible nuclides
 were tracked. Each monte-carlo system simulation was run with 10k neutrons for
 40 inactive cycles with 60 active cycles; average cycle error on neutron
-mulitiplication was approximately 150 pcm.
+multiplication was approximately 150 pcm. Simulations were carried out on the
+Savior HPC cluster here at UC Berkeley on a Dell PowerEdge C6220 server blade
+equipped with two Intel Xenon 10-core Ivy Bridge processors all running at
+2.5 GHz having 64 GB of memory.
 
 \begin{figure} \label{fig:periodic}
 \begin{centering}
@@ -321,5 +326,212 @@ years. Periodic table layout in TikZ provided by Chris Rump and Ivan Griffin
 through overleaf.com}
 \end{figure}
 
+\subsection{Simulation Outputs}\label{ssec:outputs}
+
+In Figures \ref{fig:fuel} through \ref{fig:k} the results of the simulation
+described in section \ref{ssec:setup} - with input given in Appendix
+\ref{app:input} - are given below. Following this presentation in section
+\ref{ssec:disc} the lessons learned from these figures and outputs are
+given. The units given for group and stream values, $\%-\rho^{mat}_{i}$, are
+relative fractions of the host material, $mat$, density as measured at the 
+beginning of burnup step $i$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fuel}
+    \caption{The primary fuel constituents - Li (yellow), Be (purple), F (red),
+    U (green), Th (blue) - atom density over the entire simulation.}
+    \label{fig:fuel}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fp}
+    \caption{As described in section \ref{ssec:setup} and visually seen in
+    Figure \ref{fig:periodic} here is seen the atomic density of all elements
+    in the salt considered to be fission products.}
+    \label{fig:fp}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{nat}
+    \caption{The atomic density of the sum total of elements removed from the
+    system by the stream used to simulate natural removal processes.}
+    \label{fig:nat}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{proc}
+    \caption{The atomic density of the sum total of elements removed from the
+    system by the stream used to simulate a reprocessing function applied to
+    the fuel salt.}
+    \label{fig:proc}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgLiS}
+    \caption{The atomic density of lithium elements considered to be a primary
+    salt constituent.}
+    \label{fig:GgLiS}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgLi}
+    \caption{The atomic density of lithium elements excepting those considered 
+    to be a primary salt constituent.}
+    \label{fig:GgLi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgAllLi}
+    \caption{The atomic density of all lithium isotopes in the simulation.} 
+    \label{fig:GgAllLi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgBe}
+    \caption{The atomic density of all beryllium isotopes in the simulation.} 
+    \label{fig:GgBe}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgAllF}
+    \caption{The atomic density of all fluorine isotopes in the simulation.} 
+    \label{fig:GgAllF}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgFli}
+    \caption{The atomic density of all fluorine isotopes considered to be bonded
+    to lithium atoms which are considered to be primary fuel salt constituents.}
+    \label{fig:GgFli}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgFbe}
+    \caption{The atomic density of all fluorine isotopes considered to be bonded
+    to beryllium atoms.}
+    \label{fig:GgFbe}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgFth}
+    \caption{The atomic density of all fluorine isotopes considered to be bonded
+    to thorium atoms}
+    \label{fig:GgFth}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{GgFu}
+    \caption{The atomic density of all fluorine isotopes considered to be bonded
+    to uranium atoms}
+    \label{fig:GgFu}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgLii}
+    \caption{The deposition rate integrated over the time of burnup step $i$
+    for the stream injecting lithium isotopes into the system.}
+    \label{fig:SgLii}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgLiFo}
+    \caption{The removal rate integrated over the time of burnup step $i$
+    for the stream removing \ce{LiF} from the system.}
+    \label{fig:SgLiFo}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgBei}
+    \caption{The deposition rate integrated over the time of burnup step $i$
+    for the stream injecting beryllium-9 into the system.}
+    \label{fig:SgBei}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgBeF2o}
+    \caption{The removal rate integrated over the time of burnup step $i$
+    for the stream removing \ce{BeF2} from the system.}
+    \label{fig:SgBeF2o}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgFi}
+    \caption{The deposition rate integrated over the time of burnup step $i$
+    for the stream injecting fluorine-19 into the system.}
+    \label{fig:SgFi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgFo}
+    \caption{The removal rate integrated over the time of burnup step $i$
+    for the stream removing fluorine from the system.}
+    \label{fig:SgFo}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgThF4i}
+    \caption{The deposition rate integrated over the time of burnup step $i$
+    for the stream injecting \ce{^{232}Th^{19}F4} into the system.}
+    \label{fig:SgThF4i}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgThF4o}
+    \caption{The removal rate integrated over the time of burnup step $i$
+    for the stream removing \ce{^{232}Th^{19}F4} from the system.}
+    \label{fig:SgThF4o}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgUF4i}
+    \caption{The deposition rate integrated over the time of burnup step $i$
+    for the stream injecting \ce{^{233}U^{19}F4} into the system.}
+    \label{fig:SgUF4i}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SgUF4o}
+    \caption{The removal rate integrated over the time of burnup step $i$
+    for the stream removing \ce{^{233}U^{19}F4} from the system.}
+    \label{fig:SgUF4o}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{k}
+    \caption{The observed infinite neutron multiplication factor of the system
+    complete with error. The very first time point at $t=0$ is excluded from
+    this plot for scale reasons. The initial infinite neutron multiplication 
+    factor of the system was approximately 1.5.}
+    \label{fig:k}
+\end{figure}
+
 In Figure \ref{fig:salt} the elemental salt constituent atomic
 densities for Li, Be, F, Th, and U are plotted over time. Of note  
+
+\subsection{Simulation Input}\label{ssec:input}
+
+\verbinput{input.txt}

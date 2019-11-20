@@ -8,46 +8,47 @@ A level-1 auxiliary file: results.aux
 A level-1 auxiliary file: conclusion.aux
 A level-1 auxiliary file: appendixA.aux
 A level-1 auxiliary file: appendixB.aux
+A level-1 auxiliary file: appendixC.aux
 The style file: elsarticle-num.bst
 Database file #1: theory.bib
-You've used 10 entries,
+You've used 11 entries,
             2937 wiz_defined-function locations,
-            745 strings with 6795 characters,
-and the built_in function-call counts, 2472 in all, are:
-= -- 238
-> -- 76
+            751 strings with 7111 characters,
+and the built_in function-call counts, 2733 in all, are:
+= -- 257
+> -- 95
 < -- 0
-+ -- 32
-- -- 22
-* -- 154
-:= -- 370
-add.period$ -- 12
-call.type$ -- 10
-change.case$ -- 10
++ -- 39
+- -- 28
+* -- 173
+:= -- 412
+add.period$ -- 13
+call.type$ -- 11
+change.case$ -- 11
 chr.to.int$ -- 0
-cite$ -- 10
-duplicate$ -- 71
-empty$ -- 272
-format.name$ -- 28
-if$ -- 636
+cite$ -- 11
+duplicate$ -- 79
+empty$ -- 296
+format.name$ -- 35
+if$ -- 700
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 9
-newline$ -- 42
-num.names$ -- 10
-pop$ -- 53
+int.to.str$ -- 11
+missing$ -- 10
+newline$ -- 46
+num.names$ -- 11
+pop$ -- 61
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 172
+skip$ -- 188
 stack$ -- 0
 substring$ -- 103
-swap$ -- 11
+swap$ -- 12
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 19
-width$ -- 12
-write$ -- 89
+while$ -- 20
+width$ -- 13
+write$ -- 97

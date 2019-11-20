@@ -1,5 +1,5 @@
 \chapter{Test Cases and Results}
-\label{sec:results}
+\label{ch:results}
 
 Given the limitations outlined in section \ref{ssec:sol}, presently the ability
 to do any kind of serious systems analysis with ADER is almost non-existent due
@@ -11,7 +11,7 @@ equilibrium within the fuel cycle.
 \subsection{Simulation Setup}\label{ssec:setup}
 The system configuration is described in this section with corresponding 
 SERPENT 2
-input provided in section \ref{ssec:input}. In short the simulation consisted
+input provided in section \ref{ch:input}. In short the simulation consisted
 of an infinite and homogeneous salt mixture, 71.8 mol-\% \ce{LiF}, 16 mol-\%
 \ce{BeF2}, 10.8 mol-\% \ce{ThF4}, and 1.2 mol-\% \ce{^{233}UF4} - the startup
 fuel for the Oak Ridge Molten Salt Reactor Experiment \cite{ORNL}. The starting
@@ -29,7 +29,7 @@ between 6.1 mol-\% and 6.5 mol-\%. The molar fractions of \ce{ThF4} as well
 as \ce{UF4} - all uranium is assumed to be uranium-IV - are left free to vary
 as ADER chooses. An oxidation range of $[-0.0002, -0.0001]$ is used to ensure
 a reductive environment within the salt with each element's assumed oxidation
-sate within the salt visually depicted in Figure \ref{periodic}. 
+sate within the salt visually depicted in Figure \ref{fig:periodic}. 
 A mass balance is applied to the
 system such that inflows must be equal, in number of mols, to outflows. Any
 lithium, beryllium, fluorine, thorium-232, and uranium are required to be
@@ -329,8 +329,8 @@ through overleaf.com}
 \subsection{Simulation Outputs}\label{ssec:outputs}
 
 In Figures \ref{fig:fuel} through \ref{fig:k} the results of the simulation
-described in section \ref{ssec:setup} - with input given in Appendix
-\ref{app:input} - are given below. Following this presentation in section
+described in section \ref{ssec:setup} - with input given in chapter 
+\ref{ssec:input} - are given below. Following these figures in section
 \ref{ssec:disc} the lessons learned from these figures and outputs are
 given. The units given for group and stream values, $\%-\rho^{mat}_{i}$, are
 relative fractions of the host material, $mat$, density as measured at the 
@@ -521,6 +521,24 @@ beginning of burnup step $i$.
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=0.8\textwidth]{fluorine}
+    \caption{The amount of fluorine over time in excess of the amount of 
+    fluorine required to bind to all the primary salt constituents: 
+    \ce{LiF}, \ce{BeF2}, \ce{ThF4}, \ce{UF4}.
+    \label{fig:fluroine}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{all_oxid}
+    \caption{The simulation's summed oxidation state over all elements and
+    weighted by the prevalence of that elements ,as in equation \ref{eq:oxi},
+    over time.}
+    \label{fig:all_oxid}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
     \includegraphics[width=0.8\textwidth]{k}
     \caption{The observed infinite neutron multiplication factor of the system
     complete with error. The very first time point at $t=0$ is excluded from
@@ -529,9 +547,166 @@ beginning of burnup step $i$.
     \label{fig:k}
 \end{figure}
 
-In Figure \ref{fig:salt} the elemental salt constituent atomic
-densities for Li, Be, F, Th, and U are plotted over time. Of note  
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{flux_0}
+    \caption{The scalar neutron flux within the system broken up into
+    equal-lethargy width bins taken at day zero.}
+    \label{fig:flux_0}
+\end{figure}
 
-\subsection{Simulation Input}\label{ssec:input}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{flux_219}
+    \caption{The scalar neutron flux within the system broken up into
+    equal-lethargy width bins taken at burnup step 219 - the center of the
+    discontinuity.}
+    \label{fig:flux_219}
+\end{figure}
 
-\verbinput{input.txt}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{flux_601}
+    \caption{The scalar neutron flux within the system broken up into
+    equal-lethargy width bins taken after the last burnup step.}
+    \label{fig:flux_601}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Uf}
+    \caption{The relative percentage change in the fission cross section of
+    \ce{^{233}U} per burnup step throughout the simulation.}
+    \label{fig:uf}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Uc}
+    \caption{The relative percentage change in the absorption cross section of
+    \ce{^{233}U} per burnup step throughout the simulation.}
+    \label{fig:uf}
+\end{figure}
+
+\subsection{Simulation Assessment}\label{sec:disc}
+
+In Figure \ref{fig:fuel} the elemental salt constituent atomic
+densities for Li, Be, F, Th, and U are plotted over time. This plot represents
+a turning point in MSR modelling, one after which incorporating chemistry 
+restraints into nuclear burnup calculations is possible. Beginning with fluorine
+as the most abundant salt constituent a steady decline is observed - at first
+very slight but growing in magnitude towards the end of the simulation. At an
+exaggerated scale figure \ref{fig:GgAllF} magnifies this trend. 
+
+Throughout this section a theme that will emerge are the apparent shortcomings
+of using the CLP linear optimization library for such an endeavor. While Sandia
+national labs tested CLP themselves, \cite{gearhart_comparison_2013}, and my
+own stress tests as well as ADER's unit and integration tests confirmed that
+CLP could and would handle the floating point precision involved in these kinds
+of problems, it was not until years later that Ma and Saunders would show in
+\cite{STANFORD} that the numerical instability issues do not arise until many
+thousands of parameters are involved in the calculations. The input for this
+simulation was checked in a debugger at every stage of program execution and was
+found to be consistent with the expected behavior given the input seen in
+chapter \ref{ch:input}. Indeed, the linear optimization matrix as requested by
+CLP was checked and found to be consistent with describing the input to CLP.
+Despite this the behavior from CLP, as observed in the previous figures, 
+indicates a solutions which ignores arbitrary parameters as well as crashing
+all together on a whole host of other problems.
+
+A prime example of this behavior is seen in figure \ref{fig:SgFi} where the
+injection stream for fluoride-19 is seen to take only negative values other than
+zero. A hard lower bound of zero was applied to all streams in the CLP solution.
+An interesting observation is that this 'negative injection' by this stream
+would seem to fill in the missing trend seen in figure \ref{fig:SgFo} and indeed
+accounts for some of the change observed in figure \ref{fig:GgAllF}. Figure
+\ref{fig:SgFo} does have the expected behavior in reference to figure
+\ref{fig:GgAllF}. While CLP ignores some parameters it does follow others as
+exemplified in figure \ref{fig:fluorine} where it can be seen that throughout
+the entire simulation sufficient fluorine was kept in the system to bind to all
+primary fuel constituents where excess fluorine is taken to be the fluorine 
+unaccounted for in the system after summing all fluorine required to bond to the
+primary fuel constituents. Figures \ref{fig:GgF-li}, \ref{fig:GgF-be},
+\ref{fig:GgF-th}, and \ref{fig:GgF-u} confirm that the respective fluorine
+groups track their bonded element at the appropriate ratios.
+
+The behavior seen for beryllium follows a similar trend with the removal stream
+for \ce{BeF2} having negative values corresponding to a brief positive trend
+in the injection stream for beryllium as can be seen in figures
+\ref{fig:SgBeF2o} and \ref{fig:SgBei} respectively. This behavior is consistent
+with the maximization for the beryllium fuel group by ADER in the initial days
+of fission product production to counter the produced negative reactivity by
+further thermalizing the spectrum with beryllium. 
+
+This observation is further backed by the initial loss of lithium in the
+early steps of the simulation as seen in figures \ref{fig:GgLiS} and 
+\ref{fig:GgAllLi} - again to increase system reactivity as lithium-6 is a
+strong neutron poison. Again slight negative values are seen in a stream as can
+be observed in figure \ref{fig:SgLiFo}. The increased injections of lithium 
+into the system, accounting for the rise seen in figure \ref{fig:GgAllF}, are
+seen in figure \ref{fig:SgLii}. From figure \ref{fig:GgLi} it can be seen that
+this increase in lithium was not for primary salt constituent balance purposes.
+Rather, this increase in lithium, along with the expected increase in fission
+products which are entirely oxidizing to the salt, accounts for the overall
+system increase of the weighted oxidation state value as seen in figure
+\ref{fig:all_oxid}.
+
+This continued increase of the weighted system oxidation state up to the
+positive asymptote observed at 0.004 a.u. is a complete violation of the 
+hard oxidation state value limits that were set for this simulation of 
+$[-0.0002, -0.0001]$. Furthermore it would seem that this system oxidation
+state was actually pursued by CLP as there is no other reason to by injecting
+additional lithium, a neutron poison, into the system.
+
+The initial injections of thorium into the system as seen in figure
+\ref{fig:SgThF4i} are produced to account for the unacceptably high 
+initial system neutron multiplication factor as can be seen in figure
+\ref{fig:k} - even though in that figure the very first point at $[k=1.06,t=0]$
+has been cut off for scale readability purposes. Interestingly enough the
+thorium removal stream maintains a perfect zero value throughout 
+the simulation indicating that the thorium depletion seen in figure
+\ref{fig:fuel} is due entirely to nuclear processes to the degree that would be
+expected.
+
+Looking to uranium the two errant values of positive uranium removal seen in
+figure \ref{fig:SgUF4o} have no explanation other than possible CLP numerical
+instability. On the other hand, the steady increase in uranium injection
+as seen in figure \ref{fig:SgUF4i} is entirely expected given the observed
+increase in fission products, a powerful neutron poison, in figure \ref{fig:fp}.
+
+The behavior of the natural processes removal stream, as seen in figure
+\ref{fig:nat} follows the expected pattern with a rapid rise to its
+saturation value as the equilibrium content of short lived - or rapidly removed
+- fission products is approached. The behavior of the reprocessing stream as 
+seen in figure \ref{fig:proc} agrees with the behavior observed for the overall
+fission product concentration as seen in figure \ref{fig:fp} and for which the
+two of them explain the fission product concentration approach to its
+equilibrium value.
+
+In the first 6000 days of the simulation ADER maintains the neutron
+multiplication factor within the requested bounds as seen in figure \ref{fig:k}
+through the application of streams as seen in the figures previously 
+discussed. However, over a series of burnup steps, 216 - 221, the
+neutron multiplication factor of the system falls quickly, and then while
+remaining below the desired neutron multiplication factor targets, continues
+in a downward trend despite a continuing increase in the amount of \ce{^{233}U}
+injected into the system as seen in figure \ref{fig:SgUF4i}. As seen in figures
+\ref{fig:uf} and \ref{fig:uc} the fission and capture cross sections of 
+\ce{^{233}U} do not change through the entire simulation. Furthermore, as
+can be seen in figures \ref{fig:flux_0}, \ref{fig:flux_219}, and 
+\ref{fig:flux_601} the neutron spectrum does not change through the entire 
+simulation and not in the middle of the discontinuity either. In debugging
+efforts no deviation from previous burnup steps or later burnup steps
+in the evaluation of nuclear cross sections by ADER was found however ADER
+consistently, from the discontinuity inwards, chose material configurations
+that by its own calculations would drive the system neutron multiplication
+factor below the desired minimum target of 1.00.
+
+Overall these results represent a mixed bag. Obviously ADER's use of CLP suffers
+from pernicious and extensive numerical instability issues. These issues
+manifest not just in aborted simulations but in simulation results which 
+do not adhere to the system parameters as defined. Despite these shortcomings
+ADER does execute some of its intended functions such as general chemical
+solubility control and species accounting. It is in the additional and single
+row objectives that ADER seems to produce errant results. 
+ 

@@ -26,7 +26,12 @@
 \contentsline {figure}{\numberline {3.22}{\ignorespaces The removal rate integrated over the time of burnup step $i$ for the stream removing \ce {^{232}Th^{19}F4} from the system.\relax }}{44}
 \contentsline {figure}{\numberline {3.23}{\ignorespaces The deposition rate integrated over the time of burnup step $i$ for the stream injecting \ce {^{233}U^{19}F4} into the system.\relax }}{45}
 \contentsline {figure}{\numberline {3.24}{\ignorespaces The removal rate integrated over the time of burnup step $i$ for the stream removing \ce {^{233}U^{19}F4} from the system.\relax }}{46}
-\contentsline {figure}{\numberline {3.25}{\ignorespaces The observed infinite neutron multiplication factor of the system complete with error. The very first time point at $t=0$ is excluded from this plot for scale reasons. The initial infinite neutron multiplication factor of the system was approximately 1.5.\relax }}{47}
+\contentsline {figure}{\numberline {3.25}{\ignorespaces The simulation's summed oxidation state over all elements and weighted by the prevelance of that elements ,as in equation 2.10\hbox {}, over time.\relax }}{47}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces The observed infinite neutron multiplication factor of the system complete with error. The very first time point at $t=0$ is excluded from this plot for scale reasons. The initial infinite neutron multiplication factor of the system was approximately 1.5.\relax }}{48}
+\contentsline {figure}{\numberline {3.27}{\ignorespaces The scalar neutron flux within the system broken up into equal-lethargy width bins taken at day zero.\relax }}{49}
+\contentsline {figure}{\numberline {3.28}{\ignorespaces The scalar neutron flux within the system broken up into equal-lethargy width bins taken at burnup step 219 - the center of the discontinuity.\relax }}{50}
+\contentsline {figure}{\numberline {3.29}{\ignorespaces The scalar neutron flux within the system broken up into equal-lethargy width bins taken after the last burnup step.\relax }}{51}
+\addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

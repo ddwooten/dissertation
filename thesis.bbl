@@ -10,8 +10,8 @@ M.~Rosenthal, P.~Haubenreich, R.~Briggs, The development status of molten-salt
   breeder reactors, Oak Ridge National Laboratory Report 4812.
 
 \bibitem{SAMOFAR}
-V.~Ignatev, Development status of gif msr system, International Atomic Energy
-  Agency Report 49~(45).
+V.~Ignatiev, Development status of the gif msr system, International Atomic
+  Energy Agency Report 49~(45).
 
 \bibitem{Corrosion}
 J.~Koger, Fluoride salt corrosion and mass transfer in high temperature dynamic
@@ -46,6 +46,12 @@ J.~Leppänen, \href{http://montecarlo.vtt.fi}{{SERPENT} 2}.
 \bibitem{lougee-heimer_common_2003}
 R.~Lougee-Heimer, The {Common} {Optimization} {INterface} for {Operations}
   {Research}, IBM Journal of Research and Development 47~(1) (2003) 57--66.
+
+\bibitem{gearhart_comparison_2013}
+J.~L. Gearhart, K.~L. Adair, R.~J. Detry, J.~D. Durfee, K.~A. Jones, N.~Martin,
+  \href{http://prod.sandia.gov/techlib/access-control.cgi/2013/138847.pdf}{Comparison
+  of open-source linear programming solvers}, Tech. Rep. SAND2013-8847.
+\newline\urlprefix\url{http://prod.sandia.gov/techlib/access-control.cgi/2013/138847.pdf}
 
 \bibitem{STANFORD}
 D.~Ma, M.~Saunders, Solving multiscale linear programs using the simplex method

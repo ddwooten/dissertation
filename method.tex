@@ -260,7 +260,7 @@ may be defined for an arbitrary number of group pairs. To define relationships
 between the material and the related groups, a range of absolute abundances of 
 a group in a material may be specified for an arbitrary number of groups. 
 The governing equations of these relationships are found in 
-Section \ref{sssec:group_eq}. To facilitate modelling
+Section \ref{ssec:group_eq}. To facilitate modelling
 of chemical compounds with related and possibly interchangeable forms, a group
 in ADER may also be formed from the linear combination of any other groups
 previously defined. These three simple mechanisms can be combined to model
@@ -437,7 +437,7 @@ to set the optimization direction, minimization or maximization, as well as
 the optimization target from which the user can select such options, as a
 specific group in a specific material, a specific stream, 
 all material transfers, specific material transfers, and others detailed in the
-ADER user manual \ref{app:UM}.
+ADER user manual \ref{app:um}.
 
 
 \subsection{The optimization matrix} \label{ssec:opt_matrix}
@@ -622,9 +622,16 @@ optimization target.
 
 \subsection{Solution and limitations of the linear optimization problem} \label{ssec:sol}
 To solve the linear programming problem ADER employs the
-CLP library \cite{lougee-heimer_common_2003}. Once the
-sparse matrix representing the linear optimization problem is
-constructed and packed into a dense column major format this
+CLP library from the COIN-OR project \cite{lougee-heimer_common_2003}. 
+CLP is a double-precision linear optimization solver utilizing the Simplex 
+agorithm. Sandia National Laboratory noted in their report on open-source
+linear solvers that CLP was by far the fastest, most accurate, and most
+capable of the solvers they tested and that it performed on the same
+order of magnitude for any metric when compared against commercial solvers
+\cite{gearhart_comparison_2013}.
+Once ADER has constructed the
+sparse matrix representing the linear optimization problem
+and packed this matrix into a dense column major format said
 matrix is handed off to the CLP simplex solution routines. 
 CLP solves the linear programming problem and returns back a
 vector containing the value of the objective function as well as the values
@@ -856,8 +863,10 @@ SERPENT 2 and ADER interaction is seen in Figure \ref{fig:flow_chart}.
 \subsection{Algorithm implementation} \label{ssec:algorithm}
 Concerning the software engineering aspects of ADER's creation the most 
 useful resources to any curious individual are the API, user manual, and
-source code provided in appendices \ref{app:api}, \ref{app:um}, \ref{app:src}
-respectively. ADER was developed in a test-driven environment and as such
+source code provided in appendices \ref{app:api} and \ref{app:um}
+respectively while the source code is online along with the system tests
+described later in this paragraph. 
+ADER was developed in a test-driven environment and as such
 has more than 150 unit tests supporting its development as found in the file
 \texttt{testcases.c}. More than a dozen integration tests can be found
 within the code contained in functions which begin with the prefix

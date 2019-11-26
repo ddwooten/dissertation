@@ -54,21 +54,21 @@ salt, is represented by Equations
 
 \begin{equation}
 \label{eq:group_def_ele}
-g_{k} = \sum \limits_{j}^{J} E_{j}^{f,k}
+g_{n} = \sum \limits_{j}^{J} E_{j}^{f,n}
 \end{equation} 
 
 \begin{equation}
 \label{eq:group_def_iso}
-g_{k} = \sum \limits_{k}^{K} I_{k}^{f,k}
+g_{n} = \sum \limits_{k}^{K} I_{k}^{f,n}
 \end{equation}
 
-where $g_{k}$ is the fractional abundance of the 
-group in the host material, $E_{j}^{f,k}$ is the fractional abundance of element
-$j$ in group $k$ - this elemental mass having come from the material to which
-group $k$ is associated with.
-$I_{k}^{f,k}$ is the fractional 
-abundance of isotope $k$ in group $k$ - this isotopic mass having come from
-the material to which group $k$ is assigned.
+where $g_{n}$ is the fractional abundance of group $n$ 
+in the host material $h$, $E_{j}^{f,n}$ is the fractional abundance of element
+$j$ in group $n$ - this elemental mass having come from the material to which
+group $k$ is associated with, $h$.
+$I_{k}^{f,n}$ is the fractional 
+abundance of isotope $k$ in group $n$ - this isotopic mass having come from
+the material, $h$, to which group $n$ is assigned.
 If the constraint is not a single value but a range then 
 Equations \ref{eq:group_def_ele} and \ref{eq:group_def_iso} become the 
 inequalities seen
@@ -77,12 +77,12 @@ $b_{m}$ and $b_{M}$ are the lower and upper bounds, respectively.
 
 \begin{equation}
 \label{eq:group_def_ele_lim}
-b_m \leq \sum \limits_{j}^{J} E_{j}^{f,k} \leq b_{M}
+b_m \leq \sum \limits_{j}^{J} E_{j}^{f,n} \leq b_{M}
 \end{equation} 
 
 \begin{equation}
 \label{eq:group_def_iso_lim}
-b_{m} \leq \sum \limits_{k}^{K} I_{k}^{f,k} \leq b_{M} 
+b_{m} \leq \sum \limits_{k}^{K} I_{k}^{f,n} \leq b_{M} 
 \end{equation}
 
 The second principle constraint involves the relative abundance limits between 
@@ -119,26 +119,27 @@ seen in Equations \ref{eq:stream_eq_ele} and \ref{eq:stream_eq_iso}.
 
 \begin{equation}
 \label{eq:stream_eq_ele}
-s_{l} = \sum \limits_{j}^{J} E_{j}^{d}
+s_{l} = \sum \limits_{j}^{J} E_{j}^{d,l}
 \end{equation}
 
 \begin{equation}
 \label{eq:stream_eq_iso}
-s_{l} = \sum \limits_{k}^{K} I_{k}^{d}
+s_{l} = \sum \limits_{k}^{K} I_{k}^{d,l}
 \end{equation}
 
-Taking $s_{l}$ to be stream $l$, $E_{j}^{d}$ to be the change in the 
-abundance of element $j$ in the affected material, and $I_{k}^{d}$ to be 
-the change in the abundance of isotope $k$ in the affected
-material.
+Taking $s_{l}$ to be stream $l$, $E_{j}^{d,l}$ to be the change in the 
+abundance of element $j$ in the affected material, $h$, as caused by stream $l$,
+and $I_{k}^{d,l}$ to be 
+the change in the abundance of isotope $k$ in the affected material, $h$, as
+caused by stream $l$.
 % ******************************************************************************************************
 
 \subsection{Oxidation constraints} \label{ssec:oxid_eq}
 A weighted sum over all elements in a material with target values forms the 
-next constraint which can be applied to a material (Equation \ref{eq:oxi}). 
+next constraint which can be applied to a material - equation \ref{eq:oxi}. 
 Although the framework for this summation was implemented as a rough 
 approximation to redox potential
-monitoring in liquid systems (discussed more in Section \ref{ssec:oxi}) there is
+monitoring in liquid systems (discussed more in section \ref{ssec:oxi}) there is
 no reason the weights involved could not represent some other quantity of 
 interest. 
 
@@ -236,25 +237,25 @@ linear optimization or linear programming as it is sometimes known, was
 chose as the optimization method. The linear
 programming problem is represented by a sparse matrix which is manipulated to 
 produce the optimal solution given an optimization target 
-(details in Section \ref{ssec:opt_matrix}).
+(details in section \ref{ssec:opt_matrix}).
 
 
 \section{Implementation in SERPENT 2} \label{sec:implementation}
 Utilizing the linear relationships described in 
-Section \ref{sec:equations}, ADER brings to SERPENT 2 the ability for
+section \ref{sec:equations}, ADER brings to SERPENT 2 the ability for
 users to define desired relationships between constituent units of a material 
 and to define material flows within
 the system. Additionally ADER provides tools for constraints based upon the 
 elemental composition of a material
 as well as constraints relating to the multiplication factor of a system. 
-In this Section the realization of these tools in SERPENT 2 is detailed.
+In this section the realization of these tools in SERPENT 2 is detailed.
 
 
 % ******************************************************************************************************
 
 \subsection{Groups} \label{ssec:groups}
 A \textit{group} is an elementary structure in the ADER framework as described 
-in Section \ref{ssec:group_eq}.
+in section \ref{ssec:group_eq}.
 Elaborating further, a group is composed of a fixed set of elements, with or 
 without specified isotopics, with fixed abundances relative to the group as a 
 whole, e.g.,  a group could be made to specify that it is one part uranium and 
@@ -265,18 +266,18 @@ material constituent that is connected to a material by set relations.
 For example, the user can define the material FLiBe as 2LiF-Be\ce{F_2}, 
 then define two groups as \ce{LiF} and \ce{BeF_2} and then specify the 
 constraint that the material FLiBe maintains a  2:1 ratio between the two 
-groups regardless of any other occurring change. As stated in Section 
+groups regardless of any other occurring change. As stated in section 
 \ref{sec:implementation} a group can be applied to any control volume and 
 itself has no inherent density associated with it.
 
 ADER provides several means to define the relationships between groups, and 
-between  materials and groups. To define relationships between groups (in a
-material) a range of relative abundances between any two groups
-may be defined for an arbitrary number of group pairs. To define relationships
+between  materials and groups. To define relationships between groups 
+a range of relative abundances between any two groups in the same material
+may be defined for any arbitrary number of group pairs. To define relationships
 between the material and the related groups, a range of absolute abundances of 
 a group in a material may be specified for an arbitrary number of groups. 
 The governing equations of these relationships are found in 
-Section \ref{ssec:group_eq}. To facilitate modelling
+section \ref{ssec:group_eq}. To facilitate modelling
 of chemical compounds with related and possibly interchangeable forms, a group
 in ADER may also be formed from the linear combination of any other groups
 previously defined. These three simple mechanisms can be combined to model
@@ -383,7 +384,7 @@ repository modelling to biological radiation dose analysis.
 % ******************************************************************************************************
 
 \subsection{Oxidation control} \label{ssec:oxi}
-As mentioned in Section \ref{ssec:oxid_eq} the oxidation control portion of 
+As mentioned in section \ref{ssec:oxid_eq} the oxidation control portion of 
 ADER is a weighted sum over
 the elements in a material with bounds for the evaluation of the sum set by 
 the user. In the oxidation table structure a complete list
@@ -453,7 +454,7 @@ to set the optimization direction, minimization or maximization, as well as
 the optimization target from which the user can select such options, as a
 specific group in a specific material, a specific stream, 
 all material transfers, specific material transfers, and others detailed in the
-ADER user manual \ref{app:um}.
+ADER user manual in appendix \ref{app:um}.
 
 
 \subsection{The optimization matrix} \label{ssec:opt_matrix}
@@ -461,7 +462,7 @@ ADER user manual \ref{app:um}.
 The CLP library expects a linear programming matrix from ADER---one built from
 all the constituent equations in the ADER scheme. Before the equations 
 presented earlier in this section can be incorporated into the matrix a note
-about the effects of table-class streams should be made. As mentioned in Section
+about the effects of table-class streams should be made. As mentioned in section
 \ref{ssec:streams} table-class streams are prescriptions, meaning the mass 
 flows they
 stipulate are going to happen. This information makes it into the linear
@@ -479,7 +480,7 @@ depicts the scheme for constructing the linear programming matrix. Column bounds
 , seen above the label describing what the column represents, are given as
 are row bounds which are seen to the left of the label describing which equation
 the row represents. For the sake of brevity
-the matrix in Figure \ref{fig:opt_matrix} is for one material only though many
+the matrix in figure \ref{fig:opt_matrix} is for one material only though many
 materials may be involved in such a matrix should they be linked together
 by shared mass transfers. In which case the only variables shared between materials are the
 group-class streams and the stream equations they are a part of are the only
@@ -540,7 +541,7 @@ effects of table-class streams are captured in $\upsilon$ and $\omega$ as seen
 in Equation \ref{eq:upsilon_bound} where $s^{t}$ is a table class stream 
 abundance value. The final row is the optimization, or Opt row. This row
 indicates to the simplex routine which variables to minimize or maximize. In
-Figure \ref{fig:opt_matrix} the opt row is indicating that $g_{1}$ is the
+figure \ref{fig:opt_matrix} the opt row is indicating that $g_{1}$ is the
 optimization target. The direction of optimization, maximization or
 minimization, is a parameter which the user passes.
     
@@ -744,7 +745,7 @@ time $t$, and $F_{n}(t)$ is a feed (or removal) amount for isotope
 $n$ at time $t$. 
 
 A highly truncated burnup scheme can be
-seen in Figure \ref{fig:burn_matrix} in which there are two isotopes,
+seen in figure \ref{fig:burn_matrix} in which there are two isotopes,
 \ce{^{233}U} and \ce{^{135}Xe}, and two streams; $S_{c}$ representing a
 continuous stream with a constant injection rate and $S_{p}$ representing a
 proportional stream with a transfer rate dependent upon the concentration
@@ -766,7 +767,7 @@ stream, $h_{S_{c}}$, does not change over a burn step. The fourth row is an
 addition specific to ADER and not found in the Bateman equations; rather, this
 line, and the lines it represents, exists to keep track of the amount of an
 isotope that a proportional stream moves simply to provide this information
-to the user. The system of matrices seen in Figure \ref{fig:burn_matrix} is
+to the user. The system of matrices seen in figure \ref{fig:burn_matrix} is
 solved by SERPENT 2 providing updated isotopic abundances and proportional 
 stream transfer amounts.
 
@@ -851,7 +852,7 @@ stream transfer amounts.
 The Bateman equation Eq.\ref{eq:Bateman} is not a standalone description of the
 isotopic evolution of a nuclear system; rather, it is tightly coupled with the
 scalar neutron flux. Considering that the solution of the system of matrices
-in Figure \ref{fig:burn_matrix} does not solve for the scalar neutron flux
+in figure \ref{fig:burn_matrix} does not solve for the scalar neutron flux
 it is clear that the solution, if for nothing else, is an approximation. Many
 nuclear material evolution schemes iterate between solutions of the neutron
 flux and the Bateman equations within the same burnup step---SERPENT 2 is no 
@@ -878,7 +879,7 @@ type streams. These iterations happen at the beginning of every burn step in
 which the Bateman equations will be solved. Other than these actions, ADER 
 does not
 interact with Serpent 2 burnup iterations schemes. A flowchart roughly outlining
-SERPENT 2 and ADER interaction is seen in Figure 2.1.
+SERPENT 2 and ADER interaction is seen in figure 2.1.
 
 \subsection{Algorithm implementation} \label{ssec:algorithm}
 Concerning the software engineering aspects of ADER's creation the most 

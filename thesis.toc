@@ -1,32 +1,32 @@
 \contentsline {chapter}{Contents}{i}
 \contentsline {chapter}{List of Figures}{iii}
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}
-\contentsline {subsection}{\numberline {1.0.1}Framing the problem}{2}
-\contentsline {subsection}{\numberline {1.0.2}Previous Efforts}{4}
-\contentsline {chapter}{\chapternumberline {2}Method Description and Implementation}{6}
+\contentsline {section}{\numberline {1.1}Framing the problem}{2}
+\contentsline {section}{\numberline {1.2}Previous Efforts}{4}
+\contentsline {chapter}{\chapternumberline {2}Method Description and Implementation}{7}
 \contentsline {section}{\numberline {2.1}Governing Equations}{7}
-\contentsline {subsection}{\numberline {2.1.1}Composition constraints}{7}
-\contentsline {subsection}{\numberline {2.1.2}Material flow constraints}{8}
-\contentsline {subsection}{\numberline {2.1.3}Oxidation constraints}{8}
-\contentsline {subsection}{\numberline {2.1.4}Reactivity constraints}{8}
-\contentsline {subsection}{\numberline {2.1.5}The optimization method}{9}
-\contentsline {section}{\numberline {2.2}Implementation in SERPENT 2}{10}
-\contentsline {subsection}{\numberline {2.2.1}Groups}{10}
-\contentsline {subsection}{\numberline {2.2.2}Streams}{11}
-\contentsline {subsection}{\numberline {2.2.3}Oxidation control}{12}
-\contentsline {subsection}{\numberline {2.2.4}Reactivity control}{13}
-\contentsline {subsection}{\numberline {2.2.5}The optimization target}{13}
-\contentsline {subsection}{\numberline {2.2.6}The optimization matrix}{14}
-\contentsline {subsection}{\numberline {2.2.7}Solution and limitations of the linear optimization problem}{16}
-\contentsline {subsection}{\numberline {2.2.8}Material depletion}{17}
-\contentsline {subsubsection}{\numberline {2.2.8.1}Iterations}{19}
-\contentsline {subsection}{\numberline {2.2.9}Algorithm implementation}{19}
-\contentsline {chapter}{\chapternumberline {3}Test Cases and Results}{21}
-\contentsline {subsection}{\numberline {3.0.1}Simulation Setup}{21}
-\contentsline {subsection}{\numberline {3.0.2}Simulation Outputs}{22}
-\contentsline {subsection}{\numberline {3.0.3}Simulation Assessment}{52}
-\contentsline {chapter}{\chapternumberline {4}Conclusions and Future Work}{55}
-\contentsline {chapter}{Bibliography}{57}
-\contentsline {appendix}{\chapternumberline {A}ADER's API}{58}
-\contentsline {appendix}{\chapternumberline {B}ADER's User Manual}{127}
-\contentsline {appendix}{\chapternumberline {C}Input for Chapter 3\hbox {}}{162}
+\contentsline {subsection}{\numberline {2.1.1}Composition constraints}{8}
+\contentsline {subsection}{\numberline {2.1.2}Material flow constraints}{9}
+\contentsline {subsection}{\numberline {2.1.3}Oxidation constraints}{9}
+\contentsline {subsection}{\numberline {2.1.4}Reactivity constraints}{9}
+\contentsline {subsection}{\numberline {2.1.5}The optimization method}{11}
+\contentsline {section}{\numberline {2.2}Implementation in SERPENT 2}{11}
+\contentsline {subsection}{\numberline {2.2.1}Groups}{11}
+\contentsline {subsection}{\numberline {2.2.2}Streams}{12}
+\contentsline {subsection}{\numberline {2.2.3}Oxidation control}{13}
+\contentsline {subsection}{\numberline {2.2.4}Reactivity control}{14}
+\contentsline {subsection}{\numberline {2.2.5}The optimization target}{15}
+\contentsline {subsection}{\numberline {2.2.6}The optimization matrix}{15}
+\contentsline {subsection}{\numberline {2.2.7}Solution and limitations of the linear optimization problem}{17}
+\contentsline {subsection}{\numberline {2.2.8}Material depletion}{19}
+\contentsline {subsubsection}{\numberline {2.2.8.1}Iterations}{20}
+\contentsline {subsection}{\numberline {2.2.9}Algorithm implementation}{21}
+\contentsline {chapter}{\chapternumberline {3}Test Cases and Results}{23}
+\contentsline {section}{\numberline {3.1}Simulation Setup}{23}
+\contentsline {section}{\numberline {3.2}Simulation Outputs}{25}
+\contentsline {section}{\numberline {3.3}Simulation Assessment}{54}
+\contentsline {chapter}{\chapternumberline {4}Conclusions and Future Work}{57}
+\contentsline {chapter}{Bibliography}{59}
+\contentsline {appendix}{\chapternumberline {A}ADER's API}{61}
+\contentsline {appendix}{\chapternumberline {B}ADER's User Manual}{130}
+\contentsline {appendix}{\chapternumberline {C}Input for Chapter 3\hbox {}}{165}

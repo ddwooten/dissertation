@@ -39,6 +39,19 @@ B.~Betlzer, J.~Powers, A.~Worrall, Molten salt reactor neutronics and fuel
   cycle modeling and simulation with scale, Annals of Nuclear Energy 101 (2017)
   489--503.
 
+\bibitem{SCALE}
+B.~Rearden, M.~Jessee, Scale code system, Oak Ridge National Laboratory
+  Internal Report 6~(2005).
+
+\bibitem{TRITON}
+M.~DeHart, I.~Gauld, M.~Williams, High-fidelity lattice physics capabilities of
+  the scale code system using triton, Joint International Topical Meeting on
+  Mathematics \& Computation in Nuclear Applications.
+
+\bibitem{ORIGEN}
+M.~Bell, Origen - the ornl isotope generation and depletion code, Oak Ridge
+  National Laboratory Internal Report~(4628).
+
 \bibitem{Jaakko}
 J.~Leppänen, \href{http://montecarlo.vtt.fi}{{SERPENT} 2}.
 \newline\urlprefix\url{http://montecarlo.vtt.fi}

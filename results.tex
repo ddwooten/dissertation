@@ -11,7 +11,7 @@ equilibrium within the fuel cycle.
 \section{Simulation Setup}\label{ssec:setup}
 The system configuration is described in this section with corresponding 
 SERPENT 2
-input provided in section \ref{ch:input}. In short the simulation consisted
+input provided in appendix \ref{app:input}. In short the simulation consisted
 of an infinite and homogeneous salt mixture, 71.8 mol-\% \ce{LiF}, 16 mol-\%
 \ce{BeF2}, 10.8 mol-\% \ce{ThF4}, and 1.2 mol-\% \ce{^{233}UF4} - the startup
 fuel for the Oak Ridge Molten Salt Reactor Experiment \cite{ORNL}. The starting
@@ -329,9 +329,9 @@ through overleaf.com}
 \section{Simulation Outputs}\label{ssec:outputs}
 
 In Figures \ref{fig:fuel} through \ref{fig:k} the results of the simulation
-described in section \ref{ssec:setup} - with input given in chapter 
-\ref{ssec:input} - are given below. Following these figures in section
-\ref{ssec:disc} the lessons learned from these figures and outputs are
+described in section \ref{ssec:setup} - with input given in appendix 
+\ref{app:input} - are given below. Following these figures in section
+\ref{sec:disc} the lessons learned from these figures and outputs are
 given. The units given for group and stream values, $\%-\rho^{mat}_{i}$, are
 relative fractions of the host material, $mat$, density as measured at the 
 beginning of burnup step $i$.
@@ -525,7 +525,7 @@ beginning of burnup step $i$.
     \caption{The amount of fluorine over time in excess of the amount of 
     fluorine required to bind to all the primary salt constituents: 
     \ce{LiF}, \ce{BeF2}, \ce{ThF4}, \ce{UF4}.}
-    \label{fig:fluroine}
+    \label{fig:fluorine}
 \end{figure}
 
 \begin{figure}[H]
@@ -585,7 +585,7 @@ beginning of burnup step $i$.
     \includegraphics[width=0.8\textwidth]{Uc}
     \caption{The relative percentage change in the absorption cross section of
     \ce{^{233}U} per burnup step throughout the simulation.}
-    \label{fig:uf}
+    \label{fig:uc}
 \end{figure}
 
 \section{Simulation Assessment}\label{sec:disc}
@@ -608,7 +608,7 @@ of problems, it was not until years later that Ma and Saunders would show in
 thousands of parameters are involved in the calculations. The input for this
 simulation was checked in a debugger at every stage of program execution and was
 found to be consistent with the expected behavior given the input seen in
-chapter \ref{ch:input}. Indeed, the linear optimization matrix as requested by
+appendix \ref{app:input}. Indeed, the linear optimization matrix as requested by
 CLP was checked and found to be consistent with describing the input to CLP.
 Despite this the behavior from CLP, as observed in the previous figures, 
 indicates a solutions which ignores arbitrary parameters as well as crashing
@@ -626,8 +626,8 @@ exemplified in figure \ref{fig:fluorine} where it can be seen that throughout
 the entire simulation sufficient fluorine was kept in the system to bind to all
 primary fuel constituents where excess fluorine is taken to be the fluorine 
 unaccounted for in the system after summing all fluorine required to bond to the
-primary fuel constituents. Figures \ref{fig:GgF-li}, \ref{fig:GgF-be},
-\ref{fig:GgF-th}, and \ref{fig:GgF-u} confirm that the respective fluorine
+primary fuel constituents. Figures \ref{fig:GgFli}, \ref{fig:GgFbe},
+\ref{fig:GgFth}, and \ref{fig:GgFu} confirm that the respective fluorine
 groups track their bonded element at the appropriate ratios.
 
 The behavior seen for beryllium follows a similar trend with the removal stream

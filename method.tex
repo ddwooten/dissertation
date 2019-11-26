@@ -6,9 +6,19 @@ determining an optimal material composition given a set of constraints,
 and integrating the necessary composition adjustments into a nuclear 
 material evolution model. The
 constraints are provided by a user and are built in a generic and
-system-agnostic manner.
+system-agnostic manner. Constraints come in three types, material abundance
+constraints, nuclear constraints, and corrosion constraints. Material abundance
+constraints are built using the group structures and involve limits on the
+absolute and relative abundance of arbitrary collections of mass, groups, within
+the material. Corrosion constraints are built around a loose approximation
+of the Nernst equation as detailed in section \ref{ssec:oxi}. Nuclear
+constraints are composed of minimum and maximum bounds for the system
+neutron multiplication factor, $k_{eff}$, as such ensuring that mass flows
+into and out of the system do not drive the system away from the desired
+criticality state.
 
-Constraints are built around the concept of a \textit{group}. 
+\section{Governing Equations}
+Material abundance constraints are built around the concept of a \textit{group}.
 A group is a list of elements and their relative proportions,
 these elements themselves may or may not have specified isotopic proportions. 
 A group, being a set of ratios between sets, is arbitrary in size.
@@ -32,7 +42,6 @@ As such care was taken to preserve the linear nature of the material
 optimization problem. In the following sections the details pertaining to each
 type of constraint are presented.
 
-\section{Governing Equations} \label{sec:equations}
 \subsection{Composition constraints} \label{ssec:group_eq}
 A material, in this framework, is a collection of isotopes. In a nuclear 
 system, it might be desirable to control a material's  composition by imposing 
@@ -220,9 +229,9 @@ demonstrate the linearity of the problem.  Given a linear
 set of equations, and a set which in various configurations could be
 under-constrained, over-constrained, or equal, a unique solution can not be
 guaranteed at all times. As such the best `solution' is an optimization route
-through which the addition of an optimization target can guarentee a unique
+through which the addition of an optimization target can guarantee a unique
 solution. In respect to the the ease of implementation, the ease of use, and
-the comprehensabilility of the simulaiton results,
+the comprehensibility of the simulation results,
 linear optimization or linear programming as it is sometimes known, was
 chose as the optimization method. The linear
 programming problem is represented by a sparse matrix which is manipulated to 
@@ -533,7 +542,7 @@ abundance value. The final row is the optimization, or Opt row. This row
 indicates to the simplex routine which variables to minimize or maximize. In
 Figure \ref{fig:opt_matrix} the opt row is indicating that $g_{1}$ is the
 optimization target. The direction of optimization, maximization or
-minimization, is a parameter which the user pases.
+minimization, is a parameter which the user passes.
     
     \begin{equation*}
     \label{fig:opt_matrix}
@@ -630,7 +639,7 @@ minimization, is a parameter which the user pases.
 To solve the linear programming problem ADER employs the
 CLP library from the COIN-OR project \cite{lougee-heimer_common_2003}. 
 CLP is a double-precision linear optimization solver utilizing the Simplex 
-agorithm. Sandia National Laboratory noted in their report on open-source
+algorithm. Sandia National Laboratory noted in their report on open-source
 linear solvers that CLP was by far the fastest, most accurate, and most
 capable of the solvers they tested and that it performed on the same
 order of magnitude for any metric when compared against commercial solvers
@@ -704,7 +713,7 @@ arithmetic is incorporated ADER must be considered stochastically functional
 provide their quad-precision code, it is written in FORTRAN which would 
 necessitate the construction of a wrapper function. Additionally their code 
 takes a much more detailed and error prone format than does CLP - as such 
-necessitating  not insignificant structural modications to ADER. A significant
+necessitating  not insignificant structural modifications to ADER. A significant
 development effort would be needed to either implement the FORTRAN library or
 to update the CLP library to quad-precision.
 

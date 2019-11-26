@@ -1,5 +1,3 @@
-% (This file is included by thesis.tex; you do not latex it by itself.)
-
 \begin{abstract}
 
 Molten salt reactors (MSRs) are a class of nuclear reactor which uses a molten 
@@ -9,24 +7,41 @@ gained widespread attention. Since then MSRs have enjoyed plentiful research
 support.
 Despite such support only one
 general MSR fuel cycle analysis tool is available for use by the research
-community and even this this tool lacks an ability to dynamically adapt itself
-to a changing simulation environment as such possibly providing answers of a
-lower quality. In this work a method is proposed and implemented within the 
+community and even this this tool lacks features necessary to modelling an MSR
+,as such possibly providing answers of a lower quality. 
+
+In this work a method is proposed and implemented within the 
 SERPENT 2 reactor physics Monte-Carlo code. This method, named ADER - the
 Advanced Depletion Extension for Reprocessing - is a seamlessly incorporated
 source code modification to the SERPENT 2 base code which allows the user
-to define arbitrary collections of elements, isotopes, and chemicals.
-Furthermore ADER allows the user to specify a variety of linear relationships
-between these groups as well as limitations on and methods for their
-movement throughout the simulated system. Last but certainly not least,
-ADER provides to the user an optimization target. Through these structures
+to define arbitrary collections of elements, isotopes, and chemicals as well
+as relationships among them.
+
+Furthermore ADER allows the user to specify a variety of mass flows subject to
+the constraints as defined through the collections of elements, isotopes, and
+chemicals the user has structured. Along with support for constraints involving
+both corrosion and nuclear control concerns, ADER allows the user to optimize
+the solution against a quantity of interest such as total uranium fed into the
+system for example.
+
+Through these structures
 much of the complex chemistry, corrosion modelling, and nuclear concerns of
 operating a MSR can be linearized and solved against an optimization target,
-say the decreased consumption of fuel, and passed through a linear optimization
+which is necessary given the unmatched number of constraints and variables in
+such a problem space. Linearization reduces the problem complexity and
+eliminates concerns over local versus global optimization targets. Within the
+typically narrow operating parameters of MSRs linearization is an appropriate
+approximation to the higher dimensional equations representing the phenomenon
+involved.
+
+This linear system and optimization target may then be
+passed to a linear optimization
 solver, in this work the CLP library as part of the COIN-OR package, from which
 an optimized system material composition and material flows solution may be 
 found. ADER then uses this solution to create a brand new depletion matrix 
-which SERPENT 2 then solves using the CRAM approximation method. From this
+which SERPENT 2 then solves using the CRAM approximation method. 
+
+From this
 algorithm a more accurate modelling of MSR fuel cycles and physics may be
 arrived at through the consideration of chemistry driven limitations,
 corrosion driven limitations, nuclear driven limitations, and operator driven
@@ -37,6 +52,7 @@ pernicious numerical instability issue was uncovered within the linear
 optimization library selected for this work. Any future work on this method
 must begin with the adoption of a quadruple-precision floating-point linear
 optimization library over the current implementation of CLP as used in ADER.
+
 In the following chapters an introduction to MSRs and their fuel cycle modelling
 is given. Following this the theory behind ADER and its implementation within 
 SERPENT2 is discussed after which the results from one of a few numerically

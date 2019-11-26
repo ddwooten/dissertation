@@ -1,26 +1,31 @@
 \chapter{Introduction}\label{ch:intro}
 
-Molten salt reactors ( MSRs ) first gained attention in the 1950s as a possible
+Molten salt reactors (MSRs) first gained attention in the 1950s as a possible
 high power density propulsion source for a nuclear powered aircraft. While this
-idea never took flight the possibility for liquid molten salts as fuel for a
-nuclear reactor did in the form of the Molten Salt Reactor Experiment ( MSRE )
-conducted at Oak Ridge National Laboratory ( ORNL ) during the 1960s and 70s 
+idea never took flight, the possibility for liquid molten salts as fuel for a
+nuclear reactor did in the form of the Molten Salt Reactor Experiment (MSRE)
+conducted at Oak Ridge National Laboratory (ORNL) during the 1960s and 70s 
 \cite{ORNL}. Following an institutional redirection away from the MSRE
-program molten salt studies continued at ORNL under the Molten Salt Breeder
+program, molten salt studies continued at ORNL under the Molten Salt Breeder
 Reactor program through the 1970s and into the 80s \cite{ORNL}. After a
 brief lull in global interest during the late 80s and early 90s studies in MSRs
 began again in earnest in Europe beginning with the SAMOFAR program and continuing
 today under the ALISIA program \cite{SAMOFAR}. Since this time global interest
 in MSRs has continued to grow with concepts coming from all corners of the
 globe from both industry and governments: the Molten Salt Actinide Recycler and
-Transmuter ( MOSART ) out of Russia, the FUJI series of reactors from Japan, 
-the Liquid Fueled Thorium Molten Salt Reactor ( LF-TMSR ) out of China, the
-Molten Salt Fast Chloride Reactor ( MCFR ) from TerraPower in the United States,
-and many others.
+Transmuter (MOSART) out of Russia, the FUJI series of reactors from Japan, 
+the Liquid Fueled Thorium Molten Salt Reactor (LF-TMSR)  out of China, the
+Molten Salt Fast Chloride Reactor (MCFR) from TerraPower in the United States,
+and many others. While global attention and efforts have also increased around
+a group of reactors which use molten salts without fissile content as a coolant,
+these reactors are not dramatically different from their other fellow solid
+fuel counterparts - only the working fluid has changed. In this work reference
+to molten salt reactors refers only to those reactors in which fission occurs
+dominantly in a liquid medium.
 
 This global interest is due to molten salt's many promising characteristics such
-as high operating temperatures, low operating pressures ( near atmospheric in
-most cases ), excellent safety characteristics, and high fuel utilization just
+as high operating temperatures, low operating pressures (near atmospheric in
+most cases), excellent safety characteristics, and high fuel utilization just
 to name the top few. Many of these same characteristics create obstacles to 
 modelling MSRs with today's computational tools due to the many physical
 differences between MSRs and today's more numerous solid fuel light water
@@ -61,7 +66,7 @@ molten salt fueled reactor change over time in response to both nuclear fuel
 burnup and the reactor operator actions? Addressing this question is the goal
 of the work presented herein. 
 
-\subsection{Framing the problem}
+\section{Framing the problem}
 
 The goal is to create a nuclear fuel depletion model which accounts for the
 physical phenomena acting on the liquid fuel of a MSR with a flowing fuel core.
@@ -108,7 +113,10 @@ this manner the salt redox potential is kept at a point which will inhibit
 corrosion - essentially there is very little free fluorine to pull out chromium
 and a slight excess of positive ions to catch any new free fluorine which
 fission may produce. Given that this redox potential is dependent on the power,
-spectrum, and salt in the reactor its maintenance requires constant attention.
+spectrum, and salt in the reactor its maintenance requires constant attention
+which is accomplished via on-line redox potential measurement. Adjustment
+is accomplished with redox buffers, chemical additive which shift the
+chemical potential of the salt.
 
 An important goal for all nuclear reactor
 operators is to maintain the multiplication value of the reacting system. In a
@@ -143,7 +151,7 @@ method for simulating the fuel cycle of a MSR must account for all these
 considerations as well as for the physical phenomena which act on MSRs
 uniquely in reference to their solid-fuel counterparts.
 
-\subsection{Previous Efforts}\label{ssec:efforts}
+\section{Previous Efforts}\label{ssec:efforts}
 
 Various approaches have been made to create a methodology for simulating MSR
 fuel cycles. Given the span of decades which separate the two major epochs of
@@ -156,7 +164,7 @@ The second was developed beginning in the late 90s with more recent efforts in
 the 2010s to further expand the computational base employed by these
 methodologies. A handful of authors of late have proposed approaches for
 simulating MSR fuel cycles. The differences between these approaches tend to
-fall into 3 categories; treatment of the multiplication factor control,
+fall into three categories; treatment of the multiplication factor control,
 assumptions regarding fuel chemistry, and the set of possible reactor
 operations.
 
@@ -187,7 +195,7 @@ fragment branching ration for heavy metal isotope $k$ into isotope $l$ \cite{Auf
 
 As will be seen in chapter \ref{ch:results} this assumption does not always hold
 given the corrosion concerns of operating an MSR - concerns which Aufiero ignores
-entirely. Aufiero's modification allows for the user to re-compile SERPENT to
+entirely. Aufiero's modification allows for the user to re-compile SERPENT 2 to
 make modifications to the nuclear decay constant of any isotope - in effect 
 creating a proportional feed or removal stream. While Aufiero's work was the
 first in the modern millennium to demonstrate the reactivity following aspects
@@ -198,7 +206,12 @@ In a scripted package Ridley implements an MSR burnup method using SERPENT 2
 wrapped with Python. While Aufiero makes the hard assumption that lithium is
 removed for fission products Ridley goes the other direction and makes the
 hard assumption that lithium is added for fission products - the authors
-disagreeing on the oxidative or reducing potential of fission. Other than
+disagreeing on the oxidative or reducing potential of fission. If fission is on
+net oxidizing, then a reducing agent such as lithium should be added to the salt
+as fission progresses. If fission is on net reducing, then an oxidizing agent
+such as fluorine should be added to the salt as fission progresses. 
+
+Other than
 injecting lithium Ridley largely ignores chemistry and corrosion concerns much
 like Aufiero. Again, like Aufireo, Ridley instead focuses on finding the fuel
 feed rate to keep the simulated reactor critical. In his method, at every
@@ -210,14 +223,16 @@ rate and implements this as a batch addition to the fuel before going through
 another SEPRENT Monte Carlo and burnup cycle \cite{Ridley}. 
 
 Betzler takes a different approach overall by adding wrappers and utilities
-to the reactor physics package, SCALE \cite{Betzler}. 
+to the reactor physics package, SCALE \cite{Betzler} \cite{SCALE}. 
 Chemistry control of the simulated
 system is handled by one of these wrappers. Once TRITON has finished simulating
 the system of interest from a neutronics perspective the material compositions
 are passed to this wrapper which adjusts the concentration of specific isotopes
-to fixed user imposed limits. The resulting feeds and removals which would be
+to fixed user imposed limits \cite{TRITON}. 
+The resulting feeds and removals which would be
 needed to achieve these values are then approximated as a proportional removal
-constant, exactly like Aufiero's work, and then fed to ORIGEN. This wrapper
+constant, exactly like Aufiero's work, and then fed to ORIGEN \cite{ORIGEN}.
+ This wrapper
 system only has the ability to model proportional flows whose constants do not
 change over a burnup step - this necessitates rather small, 3 day, burnup steps
 in order that the proportional constant used does not stray too far from the
@@ -237,9 +252,12 @@ simplified way, to model chemicals and their interdependent relationships, the
 impact of material flows on system criticality, the driving factors of corrosion
 , and the influences of human decisions on a nuclear system. All of this
 directly integrated into SERPENT 2 with full user support including
-documentation and a full test suite. Behind all of these systems the user may
-see is a linear optimization kernel informing modifications to the SERPENT 2
-burnup kernel.  In the following chapters ADER is introduced. First the theory 
+documentation and a full test suite. Driving the solution to the material
+optimization problem the user will 
+see a linear optimization kernel informing modifications to the SERPENT 2
+burnup routine - namely the addition of sources and sinks for isotopes beyond
+those required in the traditional solid fuel simulation setup.  
+In the following chapters ADER is introduced. First the theory 
 on which ADER is based is
 presented in chapter \ref{ch:method} along with its integration into the reactor
 physics Monte-Carlo code SERPENT 2 \cite{Jaakko}. In chapter

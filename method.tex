@@ -55,10 +55,11 @@ g_{k} = \sum \limits_{k}^{K} I_{k}^{f,k}
 
 where $g_{k}$ is the fractional abundance of the 
 group in the host material, $E_{j}^{f,k}$ is the fractional abundance of element
-$j$ in the same material as group $k$ which is taken to be a part of group $k$,
-and $I_{k}^{f,k}$ is the fractional 
-abundance of isotope $k$ in the same material as group $k$ which is taken to 
-be a part of group $k$.
+$j$ in group $k$ - this elemental mass having come from the material to which
+group $k$ is associated with.
+$I_{k}^{f,k}$ is the fractional 
+abundance of isotope $k$ in group $k$ - this isotopic mass having come from
+the material to which group $k$ is assigned.
 If the constraint is not a single value but a range then 
 Equations \ref{eq:group_def_ele} and \ref{eq:group_def_iso} become the 
 inequalities seen
@@ -217,10 +218,16 @@ Equations \ref{eq:group_def_ele_lim}, \ref{eq:group_def_iso_lim},
 \ref{eq:stream_eq_iso}, \ref{eq:oxi}, \ref{eq:k_min}, and \ref{eq:k_max} 
 demonstrate the linearity of the problem.  Given a linear
 set of equations, and a set which in various configurations could be
-under-constrained, over-constrained, or equal, the best optimization route is
-linear optimization or linear programming as it is sometimes known. The linear
+under-constrained, over-constrained, or equal, a unique solution can not be
+guaranteed at all times. As such the best `solution' is an optimization route
+through which the addition of an optimization target can guarentee a unique
+solution. In respect to the the ease of implementation, the ease of use, and
+the comprehensabilility of the simulaiton results,
+linear optimization or linear programming as it is sometimes known, was
+chose as the optimization method. The linear
 programming problem is represented by a sparse matrix which is manipulated to 
-produce the optimal solution (details in Section \ref{ssec:opt_matrix}).
+produce the optimal solution given an optimization target 
+(details in Section \ref{ssec:opt_matrix}).
 
 
 \section{Implementation in SERPENT 2} \label{sec:implementation}
@@ -238,7 +245,7 @@ In this Section the realization of these tools in SERPENT 2 is detailed.
 
 \subsection{Groups} \label{ssec:groups}
 A \textit{group} is an elementary structure in the ADER framework as described 
-in Section \ref{sec:implementation}.
+in Section \ref{ssec:group_eq}.
 Elaborating further, a group is composed of a fixed set of elements, with or 
 without specified isotopics, with fixed abundances relative to the group as a 
 whole, e.g.,  a group could be made to specify that it is one part uranium and 
@@ -460,11 +467,9 @@ abundance of isotopes in a way that ADER is currently unaware of.
 
 Figure \ref{fig:opt_matrix}
 depicts the scheme for constructing the linear programming matrix. Column bounds
-are presented above the appropriate column whereas row bounds are presented to 
-the
-left of the appropriate row. Below the column bounds are the variables which
-the columns represent and to the right of the row bounds are the equation
-number, if any, of the equation that row represents. For the sake of brevity
+, seen above the label describing what the column represents, are given as
+are row bounds which are seen to the left of the label describing which equation
+the row represents. For the sake of brevity
 the matrix in Figure \ref{fig:opt_matrix} is for one material only though many
 materials may be involved in such a matrix should they be linked together
 by shared mass transfers. In which case the only variables shared between materials are the
@@ -480,14 +485,14 @@ Working down the matrix row by row the first row encountered represents
 Equation \ref{eq:rto_min} with arbitrary groups $g_{1}$ and $g_{2}$ whereas 
 the next row 
 down represents Equation \ref{eq:rto_max}. The third row, what will be referred
-to as an elemental future, row represents the atom balance for element $j$ where
+to as an elemental future row, represents the atom balance for element $j$ where
 $f^{n}_{E_{j}^{f}}$ is the fractional proportion of element $j$ in group $n$.
 The novel column involved here is an elemental future column whose inclusion
 in the same row closes the equation.  
 The bounds for this row are those for a
 free element or those elements which are permitted to have portions
 of the element not tied up in declared group structures. In the case of a
-controlled element, those who's complete abundance must be accounted for by
+controlled element, those whose complete abundance must be accounted for by
 group structures, the lower bound is changed to zero. 
 The fourth row, an elemental
 delta row, represents the change in the abundance of element $j$
@@ -497,7 +502,7 @@ Of course the elemental delta column
 is involved to close the balance. The fifth row, or balance row, is what ties
 together $E_{j}^{f}$ and $E_{j}^{d}$. The bounds, $\alpha$ and $\beta$,
 are equal and represent $E_{j}^{c} + r_{E_{j}^{f}}$ constituting an atom
-balance ``in time” where $E_{j}^{c}$ represents the present fractional
+balance ``in time'' where $E_{j}^{c}$ represents the present fractional
 abundance of element $j$. The fifth row requires, straightforwardly, that the
 future amount of an element be equal to the current amount plus any delta,
 or change, in the element's abundance. The sixth row is an isotopic balance row
@@ -527,8 +532,9 @@ in Equation \ref{eq:upsilon_bound} where $s^{t}$ is a table class stream
 abundance value. The final row is the optimization, or Opt row. This row
 indicates to the simplex routine which variables to minimize or maximize. In
 Figure \ref{fig:opt_matrix} the opt row is indicating that $g_{1}$ is the
-optimization target.
-
+optimization target. The direction of optimization, maximization or
+minimization, is a parameter which the user pases.
+    
     \begin{equation*}
     \label{fig:opt_matrix}
         \centering
@@ -607,7 +613,7 @@ optimization target.
             \end{block}
         \end{blockarray}
     \end{equation*}
-    Figure 3.2.6: A depiction of the Simplex optimization matrix.
+    Figure 2.0: A depiction of the Simplex optimization matrix.
 
 \begin{equation}
 \label{eq:upsilon_bound}
@@ -667,14 +673,13 @@ may reduce the degree to which the actual composition diverges from the ideal
 composition.
 
 The greatest limitation of the solution turns out not to be related to the
-physics of the problem - but the physics of computers. As put forward in 
+physics of the problem - but to the floating point precision of computers. 
+As put forward in 
 \cite{STANFORD} the limitations of machine precision become critical in
 SIMPLEX algorithms written with 64 bits or less of precision and with
-variables having magnitudes at or lower than $10^(-6)$. This issue is easily
+variables having magnitudes at or lower than $10^{-6}$. This issue is easily
 resolved by employing a SIMPLEX solver which uses quadruple or higher precision
-for floating point numbers. Unfortunately no open source SIMPLEX solver, as of
-2019, exists that employs higher than double precision for floating point
-operations.
+for floating point numbers. 
 
 The impact of this limitation is difficult to understate or pin down. Whether or
 not a small number will cause the failure of a SIMPLEX solution depends on the
@@ -686,16 +691,22 @@ to find a SIMPLEX solution and exit before a year of effective reactor
 operation has passed.
 
 Any linear transformation applied to the optimization problem preserves the
-overall problem of $x >>> y$ where $x$ and $y$ are given values in the
+overall problem of $x >> y$ where $x$ and $y$ are given values in the
 optimization problem. Furthermore, in many nuclear simulations several isotopes
 have significant importance to the purpose of the simulations and yet routinely
-have atomic densities below $10^(-6)$ relative to their host material atomic
+have atomic densities below $10^{-6}$ relative to their host material atomic
 density - \ce{^{6}Li} being a common example.
 
 Considering the limitations of machine precision on the efficacy of ADER, until
 a SIMPLEX algorithm employing quadruple or higher precision for floating point
 arithmetic is incorporated ADER must be considered stochastically functional
---- certainly a less than optimal state. 
+--- certainly a less than optimal state. While the authors of \cite{STANFORD}
+provide their quad-precision code, it is written in FORTRAN which would 
+necessitate the construction of a wrapper function. Additionally their code 
+takes a much more detailed and error prone format than does CLP - as such 
+necessitating  not insignificant structural modications to ADER. A significant
+development effort would be needed to either implement the FORTRAN library or
+to update the CLP library to quad-precision.
 
 
 % ******************************************************************************************************
@@ -858,7 +869,7 @@ type streams. These iterations happen at the beginning of every burn step in
 which the Bateman equations will be solved. Other than these actions, ADER 
 does not
 interact with Serpent 2 burnup iterations schemes. A flowchart roughly outlining
-SERPENT 2 and ADER interaction is seen in Figure \ref{fig:flow_chart}.
+SERPENT 2 and ADER interaction is seen in Figure 2.1.
 
 \subsection{Algorithm implementation} \label{ssec:algorithm}
 Concerning the software engineering aspects of ADER's creation the most 

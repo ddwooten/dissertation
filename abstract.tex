@@ -6,26 +6,22 @@ Molten salt reactors (MSRs) are a class of nuclear reactor which uses a molten
 ionic liquid as either the coolant or also as the fuel. While a 8 MWth MSR was
 successfully operated in the 1960s it was not until the early 2000s that MSRs
 gained widespread attention. Since then MSRs have enjoyed plentiful research
-support with such international projects as ALISIA and MOSART as well as
-dedicated conferences such as the Oak Ridge National Laboratory's MSR workshop
-which attracts more than 400 researchers every year. Through this considerable
-research effort significant progress has been made in such areas as materials
-selection, corrosion, salt purification and properties identification, as well
-as general reactor design. Despite these advances and more to date only one
+support.
+Despite such support only one
 general MSR fuel cycle analysis tool is available for use by the research
 community and even this this tool lacks an ability to dynamically adapt itself
 to a changing simulation environment as such possibly providing answers of a
 lower quality. In this work a method is proposed and implemented within the 
-SERPENT 2 reactor physics monte-carlo code. This method, named ADER - the
+SERPENT 2 reactor physics Monte-Carlo code. This method, named ADER - the
 Advanced Depletion Extension for Reprocessing - is a seamlessly incorporated
 source code modification to the SERPENT 2 base code which allows the user
 to define arbitrary collections of elements, isotopes, and chemicals.
 Furthermore ADER allows the user to specify a variety of linear relationships
 between these groups as well as limitations on and methods for their
-movement throughout the simulated system. Lastly but certainly not least,
+movement throughout the simulated system. Last but certainly not least,
 ADER provides to the user an optimization target. Through these structures
 much of the complex chemistry, corrosion modelling, and nuclear concerns of
-operating a MSR can be linearlized and solved against an optimization target,
+operating a MSR can be linearized and solved against an optimization target,
 say the decreased consumption of fuel, and passed through a linear optimization
 solver, in this work the CLP library as part of the COIN-OR package, from which
 an optimized system material composition and material flows solution may be 

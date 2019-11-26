@@ -105,7 +105,7 @@ current, and controlling the activity of the corrosive species - are available
 to the MSR operator. Most commonly a reducing agent, such as beryllium metal,
 is added to the salt to balance the often oxidizing nature of fission. In
 this manner the salt redox potential is kept at a point which will inhibit
-corrosion - essentially there is very little free fluorine to pull our chromium
+corrosion - essentially there is very little free fluorine to pull out chromium
 and a slight excess of positive ions to catch any new free fluorine which
 fission may produce. Given that this redox potential is dependent on the power,
 spectrum, and salt in the reactor its maintenance requires constant attention.
@@ -170,14 +170,19 @@ on two isotopes, chosen by the user which can be fed and removed proportionally
 to the deviation from criticality. To handle salt species considerations Aufiero
 ignores them, simply removing lithium for each fission product produced and
 adding it for each fission product removed as seen in equation \ref{eq:auf} 
-where $\phi$ is the scalar neutron flux, and $b$ is the branching ratio
-from isotope $j$ into Li \cite{Aufiero}. 
+where $\phi$ is the scalar neutron flux, $b$ is the branching ratio
+from isotope $j$ into Li, $\sigma_{j \rightarrow Li}$ is the transformation
+cross section for isotope $j$ into lithium, $\sigma_{Li \rightarrow j}$ is the
+transformation cross section for lithium into isotope $j$, $\lambda_{j}$ is
+the decay constant for isotope $j$, $\sigma_{kf}$ is the fission cross section
+for heavy metal isotope $k$, and $FY_{k \rightarrow l}$ is the fission
+fragment branching ration for heavy metal isotope $k$ into isotope $l$ \cite{Aufiero}. 
 
 \begin{equation} \label{eq:auf}
 \frac{\partial N_{Li}}{\partial t} = \sum_{j} N_{j} \phi \sigma_{j \rightarrow
     Li} - \sum_{j} N_{li} \phi \sigma_{Li \rightarrow j} + \sum_{j} N_{j}
     \lambda_{j} b_{j \rightarrow Li} - \sum_{k = HM} N_{j} \phi \sigma_{kf}
-    \left ( \sum_{l=FP}FY_{k \rightarrow f} \right )
+    \left ( \sum_{l=FP}FY_{k \rightarrow l} \right )
 \end{equation}
 
 As will be seen in chapter \ref{ch:results} this assumption does not always hold
@@ -190,7 +195,7 @@ of an MSR, his modifications to SERPENT 2 proved clunky and inadequate for
 further pursuit.
 
 In a scripted package Ridley implements an MSR burnup method using SERPENT 2
-wrapped with Python. While Aufiero makes the hard assumption that Lithium is
+wrapped with Python. While Aufiero makes the hard assumption that lithium is
 removed for fission products Ridley goes the other direction and makes the
 hard assumption that lithium is added for fission products - the authors
 disagreeing on the oxidative or reducing potential of fission. Other than
@@ -213,10 +218,10 @@ are passed to this wrapper which adjusts the concentration of specific isotopes
 to fixed user imposed limits. The resulting feeds and removals which would be
 needed to achieve these values are then approximated as a proportional removal
 constant, exactly like Aufiero's work, and then fed to ORIGEN. This wrapper
-system only has the ability to model proportional flows who's constants do not
+system only has the ability to model proportional flows whose constants do not
 change over a burnup step - this necessitates rather small, 3 day, burnup steps
-in order that the proportional constant used does not stray to far from the
-desired result. With regards to criticality control Betzler employ's the crudest
+in order that the proportional constant used does not stray too far from the
+desired result. With regards to criticality control Betzler employs the crudest
 method of all those seen, iteratively changing the concentration of a single
 user specified isotope and re-running the system simulation to see if the
 desired criticality condition was met. No automated system for addressing
@@ -237,9 +242,9 @@ see is a linear optimization kernel informing modifications to the SERPENT 2
 burnup kernel.  In the following chapters ADER is introduced. First the theory 
 on which ADER is based is
 presented in chapter \ref{ch:method} along with its integration into the reactor
-physics monte-carlo code SERPENT 2 \cite{Jaakko}. In chapter
+physics Monte-Carlo code SERPENT 2 \cite{Jaakko}. In chapter
 \ref{ch:results} the capabilities of ADER are investigated in relation to a
-hypothetical MSR fuel cycle. In chapter \ref{ch:con} the concluding remarks
+hypothetical MSR fuel cycle. In chapter \ref{ch:conc} the concluding remarks
 on the effects of ADER on
 MSR fuel cycle modelling are presented as well as recommendations for next
 steps. 

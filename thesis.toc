@@ -1,6 +1,5 @@
 \contentsline {chapter}{Contents}{i}
 \contentsline {chapter}{List of Figures}{iii}
-\contentsline {chapter}{List of Tables}{v}
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}
 \contentsline {subsection}{\numberline {1.0.1}Framing the problem}{2}
 \contentsline {subsection}{\numberline {1.0.2}Previous Efforts}{4}
@@ -17,17 +16,17 @@
 \contentsline {subsection}{\numberline {2.2.3}Oxidation control}{12}
 \contentsline {subsection}{\numberline {2.2.4}Reactivity control}{13}
 \contentsline {subsection}{\numberline {2.2.5}The optimization target}{13}
-\contentsline {subsection}{\numberline {2.2.6}The optimization matrix}{13}
+\contentsline {subsection}{\numberline {2.2.6}The optimization matrix}{14}
 \contentsline {subsection}{\numberline {2.2.7}Solution and limitations of the linear optimization problem}{16}
 \contentsline {subsection}{\numberline {2.2.8}Material depletion}{17}
-\contentsline {subsubsection}{\numberline {2.2.8.1}Iterations}{18}
+\contentsline {subsubsection}{\numberline {2.2.8.1}Iterations}{19}
 \contentsline {subsection}{\numberline {2.2.9}Algorithm implementation}{19}
 \contentsline {chapter}{\chapternumberline {3}Test Cases and Results}{21}
 \contentsline {subsection}{\numberline {3.0.1}Simulation Setup}{21}
 \contentsline {subsection}{\numberline {3.0.2}Simulation Outputs}{22}
 \contentsline {subsection}{\numberline {3.0.3}Simulation Assessment}{52}
 \contentsline {chapter}{\chapternumberline {4}Conclusions and Future Work}{55}
-\contentsline {chapter}{\chapternumberline {5}ADER's API}{57}
-\contentsline {chapter}{\chapternumberline {6}ADER's User Manual}{126}
-\contentsline {chapter}{\chapternumberline {7}Input for Chapter 3\hbox {}}{161}
-\contentsline {chapter}{Bibliography}{173}
+\contentsline {chapter}{Bibliography}{57}
+\contentsline {appendix}{\chapternumberline {A}ADER's API}{58}
+\contentsline {appendix}{\chapternumberline {B}ADER's User Manual}{127}
+\contentsline {appendix}{\chapternumberline {C}Input for Chapter 3\hbox {}}{162}

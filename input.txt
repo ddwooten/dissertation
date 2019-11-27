@@ -180,7 +180,6 @@ rto gF-th val 4 grp2 gTh232
 rto gF-u val 4 grp2 gU
 rng gAllF   min 0.0 max 1.0
 rng gF min 0.0 max 1.0
-preserve mols
 cnt cnt_table
 oxi oxid_control min -0.0002  max -0.0001
 opt dir min type action streams 

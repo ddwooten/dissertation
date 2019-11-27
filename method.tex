@@ -475,12 +475,12 @@ approximations, and sometimes poor approximations, of the actual amount of an
 isotope or element that will be removed as nuclear processes change the 
 abundance of isotopes in a way that ADER is currently unaware of.
 
-Figure \ref{fig:opt_matrix}
+Figure 2.0
 depicts the scheme for constructing the linear programming matrix. Column bounds
 , seen above the label describing what the column represents, are given as
 are row bounds which are seen to the left of the label describing which equation
 the row represents. For the sake of brevity
-the matrix in figure \ref{fig:opt_matrix} is for one material only though many
+the matrix in figure 2.0 is for one material only though many
 materials may be involved in such a matrix should they be linked together
 by shared mass transfers. In which case the only variables shared between materials are the
 group-class streams and the stream equations they are a part of are the only
@@ -541,7 +541,7 @@ effects of table-class streams are captured in $\upsilon$ and $\omega$ as seen
 in Equation \ref{eq:upsilon_bound} where $s^{t}$ is a table class stream 
 abundance value. The final row is the optimization, or Opt row. This row
 indicates to the simplex routine which variables to minimize or maximize. In
-figure \ref{fig:opt_matrix} the opt row is indicating that $g_{1}$ is the
+figure 2.0 the opt row is indicating that $g_{1}$ is the
 optimization target. The direction of optimization, maximization or
 minimization, is a parameter which the user passes.
     

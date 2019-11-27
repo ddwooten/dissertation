@@ -29,10 +29,8 @@ between 6.1 mol-\% and 6.5 mol-\%. The molar fractions of \ce{ThF4} as well
 as \ce{UF4} - all uranium is assumed to be uranium-IV - are left free to vary
 as ADER chooses. An oxidation range of $[-0.0002, -0.0001]$ is used to ensure
 a reductive environment within the salt with each element's assumed oxidation
-sate within the salt visually depicted in Figure 3.1. 
-A mass balance is applied to the
-system such that inflows must be equal, in number of mols, to outflows. Any
-lithium, beryllium, fluorine, thorium-232, and uranium are required to be
+sate within the salt visually depicted in figure 3.1. 
+Any lithium, beryllium, fluorine, thorium-232, and uranium are required to be
 represented in a group structure during the linear optimization. The
 optimization target is set as the minimization of total gross flows.
 
@@ -40,8 +38,8 @@ The stream modelling natural removal removes the following elements into an
 infinite sink with a 30 second effective-half-life: He, Ne, Ar, Kr, Nb,
 Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te, Xe, and Rn. Those elements in the gas phase
 given MSR operating temperatures and pressures - around one atmosphere and
-generally between 550 $^{\circ}$ C and 800 $^{\circ}$ C - do not remain in
-the salt and generally bubble out either in a Helium gas bubble trap or in the
+generally between 550 $^{\circ}$C and 800 $^{\circ}$C - do not remain in
+the salt and generally bubble out either in a helium gas bubble trap or in the
 pump bowl. The remaining elements in the natural removal stream are considered
 the `noble' metals and will plate out, most commonly, on the cold leg of a flow
 loop. Previous modelling by \cite{Aufiero} has shown that the 30 second
@@ -64,8 +62,9 @@ abundance is removed every 10 years.
 
 The remaining streams in this simulation are all group-class streams whose
 quantity is determined on a per burnup step basis by the linear optimization
-routine. All of these remaining streams inject or remove their assigned quantity
-of material at a continuous and unchanged rate with respect to time. These
+routine. All of these remaining streams inject or remove their assigned 
+quantity, per burnup step, of material at a continuous and unchanged rate 
+with respect to time. These
 remaining streams are a lithium injection stream enriched to 99.995 \% 
 \ce{^{7}Li}, an elemental \ce{LiF} removal stream, a \ce{^{9}Be} injection
 stream, an elemental \ce{BeF2} removal stream, a \ce{^{19}F} injection stream, 
@@ -306,14 +305,14 @@ equipped with two Intel Xenon 10-core Ivy Bridge processors all running at
   \node[name=Lr, right of=No, LanthanideActinide] {\SyntheticElementTextFormat{103}{3}{Lr}{Lawrencium}};
 
 %% Draw dotted lines connecting Lanthanide breakout to main table
-  \draw (LaLu.north west) edge[dotted] (La.north west)
+  \draw (LaLu.north west) edge[dotted] (La.north west);
    %     (LaLu.north east) edge[dotted] (Lu.north east)
-        (LaLu.south west) edge[dotted] (La.south west);
+   %     (LaLu.south west) edge[dotted] (La.south west);
    %     (LaLu.south east) edge[dotted] (Lu.south east);
 %% Draw dotted lines connecting Actinide breakout to main table
-  \draw (AcLr.north west) edge[dotted] (Ac.north west)
+  %\draw (AcLr.north west) edge[dotted] (Ac.north west)
    %     (AcLr.north east) edge[dotted] (Lr.north east)
-        (AcLr.south west) edge[dotted] (Ac.south west);
+   \draw     (AcLr.south west) edge[dotted] (Ac.south west);
    %     (AcLr.south east) edge[dotted] (Lr.south east);
 
 \end{tikzpicture}
@@ -323,12 +322,12 @@ included in the natural processes removal stream as are elements in light-red
 as these are the `noble' metals which are insoluble in the salt. Elements in
 green are considered fission products of which 50\% are removed every ten
 years. Periodic table layout in TikZ provided by Chris Rump and Ivan Griffin
-through overleaf.com}
+through \textit{overleaf.com}.}
 \end{figure}
 
 \section{Simulation Outputs}\label{ssec:outputs}
 
-In Figures \ref{fig:fuel} through \ref{fig:k} the results of the simulation
+In figures \ref{fig:fuel} through \ref{fig:k} the results of the simulation
 described in section \ref{ssec:setup} - with input given in appendix 
 \ref{app:input} - are given below. Following these figures in section
 \ref{sec:disc} the lessons learned from these figures and outputs are
@@ -348,7 +347,7 @@ beginning of burnup step $i$.
     \centering
     \includegraphics[width=0.8\textwidth]{fp}
     \caption{As described in section \ref{ssec:setup} and visually seen in
-    Figure 3.1 here is seen the atomic density of all elements
+    figure 3.1 here is seen the atomic density of all elements
     in the salt considered to be fission products.}
     \label{fig:fp}
 \end{figure}
@@ -499,7 +498,7 @@ beginning of burnup step $i$.
     \centering
     \includegraphics[width=0.8\textwidth]{SgThF4o}
     \caption{The removal rate integrated over the time of burnup step $i$
-    for the stream removing \ce{^{232}Th^{19}F4} from the system.}
+    for the stream removing \ce{ThF4} from the system.}
     \label{fig:SgThF4o}
 \end{figure}
 
@@ -515,7 +514,7 @@ beginning of burnup step $i$.
     \centering
     \includegraphics[width=0.8\textwidth]{SgUF4o}
     \caption{The removal rate integrated over the time of burnup step $i$
-    for the stream removing \ce{^{233}U^{19}F4} from the system.}
+    for the stream removing \ce{UF4} from the system.}
     \label{fig:SgUF4o}
 \end{figure}
 
@@ -532,7 +531,7 @@ beginning of burnup step $i$.
     \centering
     \includegraphics[width=0.8\textwidth]{all_oxid}
     \caption{The simulation's summed oxidation state over all elements and
-    weighted by the prevalence of that elements ,as in equation \ref{eq:oxi},
+    weighted by the prevalence of that elements, as in equation \ref{eq:oxi},
     over time.}
     \label{fig:all_oxid}
 \end{figure}
@@ -590,7 +589,7 @@ beginning of burnup step $i$.
 
 \section{Simulation Assessment}\label{sec:disc}
 
-In Figure \ref{fig:fuel} the elemental salt constituent atomic
+In figure \ref{fig:fuel} the elemental salt constituent atomic
 densities for Li, Be, F, Th, and U are plotted over time. This plot represents
 a turning point in MSR modelling, one after which incorporating chemistry 
 restraints into nuclear burnup calculations is possible. Beginning with fluorine
@@ -611,7 +610,7 @@ found to be consistent with the expected behavior given the input seen in
 appendix \ref{app:input}. Indeed, the linear optimization matrix as requested by
 CLP was checked and found to be consistent with describing the input to CLP.
 Despite this the behavior from CLP, as observed in the previous figures, 
-indicates a solutions which ignores arbitrary parameters as well as crashing
+indicates a solutions which ignores parameters as well as crashing
 all together on a whole host of other problems.
 
 A prime example of this behavior is seen in figure \ref{fig:SgFi} where the
@@ -655,7 +654,7 @@ This continued increase of the weighted system oxidation state up to the
 positive asymptote observed at 0.004 a.u. is a complete violation of the 
 hard oxidation state value limits that were set for this simulation of 
 $[-0.0002, -0.0001]$. Furthermore it would seem that this system oxidation
-state was actually pursued by CLP as there is no other reason to by injecting
+state was actually pursued by CLP as there is no other reason to be injecting
 additional lithium, a neutron poison, into the system.
 
 The initial injections of thorium into the system as seen in figure
@@ -698,7 +697,7 @@ can be seen in figures \ref{fig:flux_0}, \ref{fig:flux_219}, and
 simulation and not in the middle of the discontinuity either. In debugging
 efforts no deviation from previous burnup steps or later burnup steps
 in the evaluation of nuclear cross sections by ADER was found however ADER
-consistently, from the discontinuity inwards, chose material configurations
+consistently, from the discontinuity onwards, chose material configurations
 that by its own calculations would drive the system neutron multiplication
 factor below the desired minimum target of 1.00.
 

@@ -18,10 +18,8 @@ reactor fuel cycles is proposed. This approach is based upon a linear
 optimization routine designed to approximate the limitations of the chemistry
 and nuclear concerns of reactor operations while optimizing the driving concerns
 of the reactor operators. This approach, named ADER for the Advanced Depletion
-Extension for Reprocessing, is built into the reactor physics monte-carlo code
-SERPENT 2. ADER is found to have wide support for a broad range of possible
-simulation parameters.
-While the theory and algorithm are found to be
+Extension for Reprocessing, is built into the reactor physics Monte-Carlo code
+SERPENT 2.  While the theory and algorithm are found to be
 sound, the specific implementation has been discovered to suffer from
 significant and deleterious numerical instability within the 
 linear optimization solver.
@@ -40,7 +38,7 @@ proportional removal stream on the whole system in the linear optimization
 scheme such that the approximated total effects of nuclear burnup are considered
 in material optimization. Additional improvements may be found in abandoning the
 linear optimization solver all together and rather moving towards a gradient
-approach from which an interaction scheme to more closely approximate the 
+approach from which an iteration scheme to more closely approximate the 
 effects of streams on nuclear criticality could be arrived at. 
 
 Overall the impact of ADER is unclear and will only be known in the future.

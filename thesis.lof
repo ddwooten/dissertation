@@ -2,9 +2,9 @@
 \addvspace {10pt}
 \contentsline {figure}{\numberline {2.1}{\ignorespaces A simplified schematic of interactions between SERPENT 2 and ADER. Black lines represent process flow while double-lined arrows highlight the flow of specific information.\relax }}{22}
 \addvspace {10pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Elements in blue are those which bubble out of the salt and are included in the natural processes removal stream as are elements in light-red as these are the `noble' metals which are insoluble in the salt. Elements in green are considered fission products of which 50\% are removed every ten years. Periodic table layout in TikZ provided by Chris Rump and Ivan Griffin through overleaf.com\relax }}{25}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Elements in blue are those which bubble out of the salt and are included in the natural processes removal stream as are elements in light-red as these are the `noble' metals which are insoluble in the salt. Elements in green are considered fission products of which 50\% are removed every ten years. Periodic table layout in TikZ provided by Chris Rump and Ivan Griffin through \textit {overleaf.com}.\relax }}{25}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces The primary fuel constituents - Li (yellow), Be (purple), F (red), U (green), Th (blue) - atom density over the entire simulation.\relax }}{26}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces As described in section 3.1\hbox {} and visually seen in Figure 3.1 here is seen the atomic density of all elements in the salt considered to be fission products.\relax }}{27}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces As described in section 3.1\hbox {} and visually seen in figure 3.1 here is seen the atomic density of all elements in the salt considered to be fission products.\relax }}{27}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces The atomic density of the sum total of elements removed from the system by the stream used to simulate natural removal processes.\relax }}{28}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces The atomic density of the sum total of elements removed from the system by the stream used to simulate a reprocessing function applied to the fuel salt.\relax }}{29}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces The atomic density of lithium elements considered to be a primary salt constituent.\relax }}{30}
@@ -23,11 +23,11 @@
 \contentsline {figure}{\numberline {3.19}{\ignorespaces The deposition rate integrated over the time of burnup step $i$ for the stream injecting fluorine-19 into the system.\relax }}{43}
 \contentsline {figure}{\numberline {3.20}{\ignorespaces The removal rate integrated over the time of burnup step $i$ for the stream removing fluorine from the system.\relax }}{44}
 \contentsline {figure}{\numberline {3.21}{\ignorespaces The deposition rate integrated over the time of burnup step $i$ for the stream injecting \ce {^{232}Th^{19}F4} into the system.\relax }}{45}
-\contentsline {figure}{\numberline {3.22}{\ignorespaces The removal rate integrated over the time of burnup step $i$ for the stream removing \ce {^{232}Th^{19}F4} from the system.\relax }}{46}
+\contentsline {figure}{\numberline {3.22}{\ignorespaces The removal rate integrated over the time of burnup step $i$ for the stream removing \ce {ThF4} from the system.\relax }}{46}
 \contentsline {figure}{\numberline {3.23}{\ignorespaces The deposition rate integrated over the time of burnup step $i$ for the stream injecting \ce {^{233}U^{19}F4} into the system.\relax }}{47}
-\contentsline {figure}{\numberline {3.24}{\ignorespaces The removal rate integrated over the time of burnup step $i$ for the stream removing \ce {^{233}U^{19}F4} from the system.\relax }}{48}
+\contentsline {figure}{\numberline {3.24}{\ignorespaces The removal rate integrated over the time of burnup step $i$ for the stream removing \ce {UF4} from the system.\relax }}{48}
 \contentsline {figure}{\numberline {3.25}{\ignorespaces The amount of fluorine over time in excess of the amount of fluorine required to bind to all the primary salt constituents: \ce {LiF}, \ce {BeF2}, \ce {ThF4}, \ce {UF4}.\relax }}{49}
-\contentsline {figure}{\numberline {3.26}{\ignorespaces The simulation's summed oxidation state over all elements and weighted by the prevalence of that elements ,as in equation 2.10\hbox {}, over time.\relax }}{49}
+\contentsline {figure}{\numberline {3.26}{\ignorespaces The simulation's summed oxidation state over all elements and weighted by the prevalence of that elements, as in equation 2.10\hbox {}, over time.\relax }}{49}
 \contentsline {figure}{\numberline {3.27}{\ignorespaces The observed infinite neutron multiplication factor of the system complete with error. The very first time point at $t=0$ is excluded from this plot for scale reasons. The initial infinite neutron multiplication factor of the system was approximately 1.5.\relax }}{50}
 \contentsline {figure}{\numberline {3.28}{\ignorespaces The scalar neutron flux within the system broken up into equal-lethargy width bins taken at day zero.\relax }}{51}
 \contentsline {figure}{\numberline {3.29}{\ignorespaces The scalar neutron flux within the system broken up into equal-lethargy width bins taken at burnup step 219 - the center of the discontinuity.\relax }}{52}

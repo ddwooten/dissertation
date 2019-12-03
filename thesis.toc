@@ -13,7 +13,7 @@
 \contentsline {section}{\numberline {2.2}Implementation in SERPENT 2}{11}
 \contentsline {subsection}{\numberline {2.2.1}Groups}{11}
 \contentsline {subsection}{\numberline {2.2.2}Streams}{12}
-\contentsline {subsection}{\numberline {2.2.3}Oxidation control}{13}
+\contentsline {subsection}{\numberline {2.2.3}Oxidation control}{14}
 \contentsline {subsection}{\numberline {2.2.4}Reactivity control}{14}
 \contentsline {subsection}{\numberline {2.2.5}The optimization target}{15}
 \contentsline {subsection}{\numberline {2.2.6}The optimization matrix}{15}
@@ -23,7 +23,7 @@
 \contentsline {subsection}{\numberline {2.2.9}Algorithm implementation}{21}
 \contentsline {chapter}{\chapternumberline {3}Test Cases and Results}{23}
 \contentsline {section}{\numberline {3.1}Simulation Setup}{23}
-\contentsline {section}{\numberline {3.2}Simulation Outputs}{25}
+\contentsline {section}{\numberline {3.2}Simulation Outputs}{24}
 \contentsline {section}{\numberline {3.3}Simulation Assessment}{54}
 \contentsline {chapter}{\chapternumberline {4}Conclusions and Future Work}{57}
 \contentsline {chapter}{Bibliography}{59}

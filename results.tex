@@ -1,12 +1,12 @@
 \chapter{Test Cases and Results}
 \label{ch:results}
 
-Given the limitations outlined in section \ref{ssec:sol}, presently the ability
-to do any kind of serious systems analysis with ADER is almost non-existent due
-to the numerical stability issues inherent to the solution algorithm. Despite
-this some configurations of system parameters may be found such that a simple
-and limited simulation can be run to a sufficiently long time horizon to see
-equilibrium within the fuel cycle.
+In the following sections a nuclear fuel cycle analysis as carried out by ADER,
+investigating an infinite and homogeneous mixture of fuel salt, is presented.
+A fuel salt composed of \ce{LiF-BeF2-ThF4-^{233}UF4} is exposed to a neutron
+flux such that a power density of 100 $W cm^{-3}$ is held throughout the
+simulation. Various constraints are applied through the ADER interface and
+the effects of these constraints are investigated. 
 
 \section{Simulation Setup}\label{ssec:setup}
 The system configuration is described in this section with corresponding 
@@ -610,7 +610,7 @@ found to be consistent with the expected behavior given the input seen in
 appendix \ref{app:input}. Indeed, the linear optimization matrix as requested by
 CLP was checked and found to be consistent with describing the input to CLP.
 Despite this the behavior from CLP, as observed in the previous figures, 
-indicates a solutions which ignores parameters as well as crashing
+indicates a solution which ignores parameters as well as crashing
 all together on a whole host of other problems.
 
 A prime example of this behavior is seen in figure \ref{fig:SgFi} where the
@@ -680,7 +680,10 @@ saturation value as the equilibrium content of short lived - or rapidly removed
 seen in figure \ref{fig:proc} agrees with the behavior observed for the overall
 fission product concentration as seen in figure \ref{fig:fp} and for which the
 two of them explain the fission product concentration approach to its
-equilibrium value.
+equilibrium value. This behavior is expected as table-class streams 
+have their transfer values calculated by ADER routines, not by CLP. This
+information is then passed into the CLP simulation but does not affect
+the behavior of said table-class streams.
 
 In the first 6000 days of the simulation ADER maintains the neutron
 multiplication factor within the requested bounds as seen in figure \ref{fig:k}
@@ -706,6 +709,14 @@ from pernicious and extensive numerical instability issues. These issues
 manifest not just in aborted simulations but in simulation results which 
 do not adhere to the system parameters as defined. Despite these shortcomings
 ADER does execute some of its intended functions such as general chemical
-solubility control and species accounting. It is in the additional and single
-row objectives that ADER seems to produce errant results. 
+solubility control and species accounting. It performs exceptionally well
+with regards to the behavior and incorporation of table-class streams.
+It is worth noting here that a simulation with no group-class streams will
+bypass the CLP engine all together and may result in a numerically stable
+simulation - one which would would have no features which can not already be
+found in popular nuclear depletion codes such as ORIGEN. 
+
+Nonetheless ADER demonstrates the potential application and effectiveness of
+such an algorithm for a more comprehensive approach to MSR fuel cycle
+analysis.
  

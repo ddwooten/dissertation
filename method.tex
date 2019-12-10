@@ -9,8 +9,10 @@ constraints are provided by a user and are built in a generic and
 system-agnostic manner. Constraints come in three types, material abundance
 constraints, nuclear constraints, and corrosion constraints. Material abundance
 constraints are built using the group structures and involve limits on the
-absolute and relative abundance of arbitrary collections of mass, groups, within
-the material. Corrosion constraints are built around a loose approximation
+absolute and relative abundance of groups 
+within the material: e.g. a limit of 4.95 \% of the material atomic density
+for \ce {^{235}U}. Corrosion constraints are built around a loose 
+approximation
 of the Nernst equation as detailed in section \ref{ssec:oxi}. Nuclear
 constraints are composed of minimum and maximum bounds for the system
 neutron multiplication factor, $k_{eff}$, as such ensuring that mass flows
@@ -19,9 +21,10 @@ criticality state.
 
 \section{Governing Equations}\label{sec:equations}
 Material abundance constraints are built around the concept of a \textit{group}.
-A group is a list of elements and their relative proportions,
+A group is a list of elements and their relative proportions;
 these elements themselves may or may not have specified isotopic proportions. 
-A group, being a set of ratios between sets, is arbitrary in size.
+A group, being a list of relative proportions, is arbitrary in size and can be
+applied to any volume.
 
 From the framework provided by the concept of a group a system of 
 linear equations and relationships can be built which, when taken together, 
@@ -34,7 +37,7 @@ Additionally, applying linear constraints to various weighted sums allows for
 restrictions on approximations of material qualities such as the redox 
 potential and the neutron multiplication factor. 
 
-Ensuring that the problem constraints and optimization targets are all linear 
+\noindent Ensuring that the problem constraints and optimization targets are all linear 
 strikes a compromise between the ease and reproducibility and speed of the 
 optimization  solution and the model's adherence to the physical phenomenon
 being simulated. 
@@ -62,10 +65,12 @@ g_{n} = \sum \limits_{j}^{J} E_{j}^{f,n}
 g_{n} = \sum \limits_{k}^{K} I_{k}^{f,n}
 \end{equation}
 
-where $g_{n}$ is the fractional abundance of group $n$ 
+\noindent where $g_{n}$ is the fractional abundance of group $n$ 
 in the host material $h$, $E_{j}^{f,n}$ is the fractional abundance of element
 $j$ in group $n$ - this elemental mass having come from the material to which
-group $k$ is associated with, $h$.
+group $n$ is associated with, $h$. The $f$ superscript denotes that this is the
+``future'' value of the element's material fraction, or the desired value to
+which the material streams will seek to move this element to.
 $I_{k}^{f,n}$ is the fractional 
 abundance of isotope $k$ in group $n$ - this isotopic mass having come from
 the material, $h$, to which group $n$ is assigned.
@@ -96,7 +101,7 @@ minimum and maximum bound, respectively.
 r_{m} \leq \frac{g_{1}}{g_{2}} \leq r_{M} 
 \end{equation}
 
-Equation \ref{eq:rto_ratio} can be expressed linearly as two inequalities as
+\noindent Equation \ref{eq:rto_ratio} can be expressed linearly as two inequalities as
 shown in Equations \ref{eq:rto_min} and \ref{eq:rto_max}.
 
 \begin{equation}
@@ -127,29 +132,35 @@ s_{l} = \sum \limits_{j}^{J} E_{j}^{d,l}
 s_{l} = \sum \limits_{k}^{K} I_{k}^{d,l}
 \end{equation}
 
-Taking $s_{l}$ to be stream $l$, $E_{j}^{d,l}$ to be the change in the 
-abundance of element $j$ in the affected material, $h$, as caused by stream $l$,
-and $I_{k}^{d,l}$ to be 
+\noindent Taking $s_{l}$ to be stream $l$, $E_{j}^{d,l}$ to be the change in 
+the abundance, as indicated by the superscript $d$, of element $j$ in the 
+affected material, $h$, as caused by stream $l$.
+$I_{k}^{d,l}$ is taken to be 
 the change in the abundance of isotope $k$ in the affected material, $h$, as
-caused by stream $l$.
+caused by stream $l$. These equations describe that mass flows into, out of, and
+between materials are composed of elements and that this elemental composition
+must be matched by the isotopic composition of the mass flows. Such detailed
+accounting of entities is required as any linear optimization solver is unaware
+that elements comprise their constituent isotopes
 % ******************************************************************************************************
 
 \subsection{Oxidation constraints} \label{ssec:oxid_eq}
-A weighted sum over all elements in a material with target values forms the 
+A weighted sum over all elements in a material with minimum and maximum
+target values, $O_{m}$ and $O_{M}$ respectively, forms the 
 next constraint which can be applied to a material - equation \ref{eq:oxi}. 
 Although the framework for this summation was implemented as a rough 
 approximation to redox potential
 monitoring in liquid systems (discussed more in section \ref{ssec:oxi}) there is
 no reason the weights involved could not represent some other quantity of 
-interest. 
+interest to the user. 
 
 \begin{equation}
 \label{eq:oxi}
 O_{m} \leq \sum \limits_{j}^{J} w_{E_{j}} E_{j} \leq O_{M}
 \end{equation}
 %
-where  $w_{E_{j}}$ is a weighting
-factor which can be applied to any element.
+\noindent where  $w_{E_{j}}$ is a weighting factor which can be applied to any 
+element and which exists solely for the convince of the user.
 
 % ******************************************************************************************************
 
@@ -170,32 +181,32 @@ averaged neutron production cross section, and the macroscopic absorption cross
 section for each material $m$. $P_{NL}$ is the neutron non-leakage probability.
 In ADER, the ability to control $k_{eff}$ is limited to the case of a single 
 neutron multiplying material; take $\nu\Sigma_{f}=0$ for every material but the
-multiplying material $M$ and as such Equation \ref{eq:reac} can be rewritten as
+multiplying material $H$ and as such Equation \ref{eq:reac} can be rewritten as
 follows:
 
 \begin{equation}
 \label{eq:reac_one_material}
-k_{eff} = P_{NL} \frac{\phi_M\omega_{M}\Sigma_{a}^{M}}{\sum\limits^{M}_{m}\phi_m\omega_m \Sigma_{a}^{m}} \frac{\nu\Sigma_{f}^{M}}{\Sigma_{a}^{M}}
+k_{eff} = P_{NL} \frac{\phi_H\omega_{H}\Sigma_{a}^{H}}{\sum\limits^{M}_{m}\phi_m\omega_m \Sigma_{a}^{m}} \frac{\nu\Sigma_{f}^{M}}{\Sigma_{a}^{M}}
 \end{equation}
 
-The probability of a neutron being absorbed in the multiplying material is 
+\noindent The probability of a neutron being absorbed in the multiplying material is 
 defined as follows:
 
 \begin{equation}
 \label{eq:abs_prob}
-P_{A} = P_{NL} \frac{\phi_M\omega_{M}\Sigma_{a}^{M}} {\sum\limits^{M-1}_{m}\phi_{m}\omega_m\Sigma_{a}^{m}}
+P_{A} = P_{NL} \frac{\phi_H\omega_{H}\Sigma_{a}^{H}} {\sum\limits^{M-1}_{m}\phi_{m}\omega_m\Sigma_{a}^{m}}
 \end{equation}
 
-Then $k_{eff}$ can be calculated as:
+\noindent Then $k_{eff}$ can be calculated as:
 
 \begin{equation}
 \label{eq:reac_modified}
-k_{eff} = P_{A} \frac{\nu\Sigma_{f}^{M}}{\Sigma_{a}^{M}} = P_{A} \frac{\sum\limits^{I}_{i}\nu\Sigma_{f}^{i}}{\sum\limits^{I}_{i}\Sigma_{a}^{i}}
+k_{eff} = P_{A} \frac{\nu\Sigma_{f}^{H}}{\Sigma_{a}^{H}} = P_{A} \frac{\sum\limits^{K}_{k}\nu\Sigma_{f}^{k}}{\sum\limits^{K}_{k}\Sigma_{a}^{k}}
 \end{equation}
 
-where $\nu\Sigma_{f}^i$, and $\Sigma_{a}^i$ are, respectively, the spectrum 
+\noindent where $\nu\Sigma_{f}^k$, and $\Sigma_{a}^k$ are, respectively, the spectrum 
 averaged neutron production cross section, and the absorption cross section for
-every isotope $i$ in the multiplying material $M$. This relation is expected to
+every isotope $k$ in the multiplying material $H$. This relation is expected to
 hold for simulations in which there is a dominant reactive material and for 
 which $\nu\Sigma_{f} \approx 0$ for all other materials.
 
@@ -214,11 +225,17 @@ Equations \ref{eq:k_min} and \ref{eq:k_max}.
 0 \leq \frac{k_{eff}^{max}}{P_{A}} \sum \limits_{k}^{K} \sigma_{a}^{k} I_{k} - \sum \limits_{k}^{K} \nu^{k} \sigma_{f}^{k} I_{k}
 \end{equation}
 
-A key assumption of this linearization process is that 
+\noindent A key assumption of this linearization process is that 
 $\frac{\partial P_{A}(m...M)}{\partial M} = 0$ when in truth
-$P_{A}$ is a function of the composition of material $M$. 
-The impacts of this approximation are expected to be quite small but it will 
-affect all simulations, more so those with strong leakage effects.
+$P_{A}$, the leakage probability, is a function of the composition of material 
+$m$ and each other material in the simulation. 
+The impacts of this approximation are expected to be quite small as most
+nuclear simulations have a core of critical material whose reactivity and
+leakage are very loosely coupled with the material around them. However it will 
+affect all simulations, more so those with strong leakage effects and
+neutronic feedback from neighboring materials, such as simulations of systems
+dependent on reflectors.
+ 
 %
 % ******************************************************************************************************
 
@@ -406,7 +423,9 @@ constant, $T$ is the temperature, $z$ is the number of electrons received by the
 oxidizing agent, $j$ is Faraday's constant, $[oxid]$ is the activity of the 
 oxidized species while $[red]$ is the activity of the reduced species.
 Conversions between activity and concentration are required but approximations 
-may be sufficient; this task is left to the user.
+may be sufficient; this task is left to the user. These conversions render the
+expected oxidation state for all constituents of the Nernst equation as activity
+is a partial function of oxidation state.
 
 \begin{equation}
 \label{eq:nernst}
@@ -687,9 +706,9 @@ physics of the problem - but to the floating point precision of computers.
 As put forward in 
 \cite{STANFORD} the limitations of machine precision become critical in
 SIMPLEX algorithms written with 64 bits or less of precision and with
-variables having magnitudes at or lower than $10^{-6}$. This issue is easily
-resolved by employing a SIMPLEX solver which uses quadruple or higher precision
-for floating point numbers. 
+variables having relative magnitudes at or lower than $10^{-6}$. 
+This issue is easily resolved by employing a SIMPLEX solver which uses 
+quadruple or higher precision for floating point numbers. 
 
 The impact of this limitation is difficult to understate or pin down. Whether or
 not a small number will cause the failure of a SIMPLEX solution depends on the
@@ -717,6 +736,13 @@ takes a much more detailed and error prone format than does CLP - as such
 necessitating  not insignificant structural modifications to ADER. A significant
 development effort would be needed to either implement the FORTRAN library or
 to update the CLP library to quad-precision.
+
+Were this development effort to be undertaken the complexity of the task would
+be minimal. There is one function \textit{ADEROperateMaterialCompMatrix} which
+would need to be modified. The functions \textit{ADERBuildClpModel} and
+\textit{ADERSolveClpModel} would need to be replaced with appropriate functions
+for transmitting the sparse matrix in ADER's memory to the quad-precision library
+of choice and calling said solution.
 
 
 % ******************************************************************************************************

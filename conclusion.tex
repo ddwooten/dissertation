@@ -9,7 +9,9 @@ workshop which now averages over 400 attendees from across the globe yearly.
 While significant investment and progress has been made in nearly all aspects
 of MSR development from material selection, salt purification and property
 measurement, licensing and general reactor design, comparatively little
-attention has been paid to fuel cycle analysis. The majority of attempts in
+attention has been paid to fuel cycle analysis. 
+
+The majority of attempts in
 this area have fallen short of producing widely applicable results largely due
 to the limiting effects of specific assumptions such as the salt species
 involved or the coarseness of the solution. In this work a method and
@@ -19,16 +21,54 @@ optimization routine designed to approximate the limitations of the chemistry
 and nuclear concerns of reactor operations while optimizing the driving concerns
 of the reactor operators. This approach, named ADER for the Advanced Depletion
 Extension for Reprocessing, is built into the reactor physics Monte-Carlo code
-SERPENT 2.  While the theory and algorithm are found to be
-sound, the specific implementation has been discovered to suffer from
-significant and deleterious numerical instability within the 
-linear optimization solver.
+SERPENT 2.  
 
-In its present state the usefulness of ADER is concerningly compromised and
-the implementation as a whole is drastically limited in the range of simulations
-it can execute with no method a priori to establish feasibility. Any future
+ADER brings to the users of SERPENT 2 the ability to model several aspects of
+MSR operations and fuel cycle analysis through the introduction of several vital
+utilities. The first among these is the ability to define collections of
+elements, isotopes and chemicals as well as the ability to set absolute and 
+relative abundance constraints between any set of these collections, called
+groups. In order that ADER might push material compositions towards those which
+satisfy the group constraints ADER provides to the user the ability to define
+mass transfers into, out of, and between materials in a SERPENT 2 simulation. 
+To ensure that these mass transfers do not disturb the desired neutron
+multiplication factor in the system ADER allows the user to set neutron 
+multiplication maximum and minimum values. During the material optimization
+phase ADER estimates the reactivity impact of its selected mass transfers and
+adjusts these transfers to keep the system within the desired bounds. Furthermore
+ADER provides the ability for the user to set the desired bounds of the averaged
+oxidation state of materials in a simulation such that ADER will keep its
+selected mass transfers from disturbing the redox potential of the material,
+a critical value in determining the effects and extent of corrosive activity. 
+Bringing all of this together is an easy to use and directly integrated user
+interface supported by a full suite of tests as well as documentation. 
+
+In chapter \ref{ch:results} the results of a simple simulation employing a 
+\ce{LiF-BeF2-ThF4-UF4} salt mixture in an infinite and homogeneous medium are
+presented. While this simulation did not cause CLP to crash and error out,
+nonetheless the results obtained from the simulation present a mixed view of
+ADER's implementation. ADER is certainly seen to influence the outcome of the
+depletion simulation, adding uranium salts to maintain the minimum value of the
+neutron multiplication factor in the system. However, occurring around burnup
+step 219, ADER's corrections fail to bring the neutron multiplication value
+of the system up to at least the minimum value. ADER did maintain the necessary
+amount of fluorine in the system to bind to all primary salt constituents.
+However, the mass flows ADER employed to accomplish this took on non-physical
+values. With regards to the corrosion monitoring feature of ADER, these
+limitations were completely ignored by the simulation for an unknown reason
+likely having to do with the inherent numerical instability within the
+optimization library. Despite these shortcomings this simulation has undoubtedly
+shown the value of an algorithm for incorporating the concerns which ADER
+addresses into a nuclear fuel depletion simulation. As put forth in chapter
+\ref{ch:method} the implementation of a quad-precision linear optimization solver
+should, according to \cite{STANFORD}, resolve the numerical instabilities
+plaguing ADER - at which point the algorithm is expected to show great utility
+in molten salt reactor analysis.
+
+Any future
 work going forth on this project would need to begin with the implementation
-of a floating-point quadruple-precision linear optimization solver in the place
+of said floating-point quadruple-precision linear optimization solver in the 
+place
 of the current CLP implementation. Following such a development it is expected
 that ADER will be capable of simulating the wide variety of parameters which its
 input and structure allow. Additional improvements could be found through the
@@ -36,15 +76,13 @@ incorporation of an iteration scheme whereupon the effects of nuclear burnup
 on the isotopics of the fuel over a burnup step can be approximated as a
 proportional removal stream on the whole system in the linear optimization
 scheme such that the approximated total effects of nuclear burnup are considered
-in material optimization. Additional improvements may be found in abandoning the
-linear optimization solver all together and rather moving towards a gradient
-approach from which an iteration scheme to more closely approximate the 
-effects of streams on nuclear criticality could be arrived at. 
+in material optimization. 
 
-Overall the impact of ADER is unclear and will only be known in the future.
+Overall the impact of ADER is clear in that it represents a more complete
+approach to MSR fuel cycle modelling.
 Given ADER's extensive test suite, documentation, and modular construction, it
 is not unimaginable that the above mentioned improvements may one day be made.
-In such a future the impact of ADER would certainly be greater than it is today.
+In such a future the impact of ADER would certainly be greater.
 Despite this shortcoming ADER has shown that a linear optimization scheme can
 be effectively applied to the chemistry, nuclear, and operational concerns of a
 molten salt reactor in such a way as to predict the future fuel composition and 

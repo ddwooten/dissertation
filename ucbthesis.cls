@@ -395,7 +395,7 @@
 
   \begin{center}
     \fmfont
-    \textbf{\@title}\par
+    \@title \par
     \vspace{14pt minus 4pt}
     by \par
     {\@author}\par
